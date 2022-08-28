@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastroDeUsuariosActivity">
+
+    <TextView
+        android:id="@+id/cadastro_de_usuarios_titulo"
+        android:layout_width="match_parent"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_height="wrap_content"
+        android:text="@string/cadastro_de_usuario_titulo_text"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:layout_margin="@dimen/spacing_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/cadastro_de_usuarios_nome_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_cadastro_de_usuarios"
+        android:hint="@string/cadastro_de_usuario_nome_edit"
+        android:inputType="none"
+        android:maxLines="1"
+        android:padding="@dimen/spacing_16"
+        android:layout_marginTop="@dimen/spacing_100"
+        android:textAllCaps="false"
+        android:layout_marginHorizontal="@dimen/spacing_24"
+        app:layout_constraintTop_toBottomOf="@+id/cadastro_de_usuarios_titulo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/cadastro_de_usuarios_email_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_cadastro_de_usuarios"
+        android:hint="@string/cadastro_de_usuario_email_edit"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="@dimen/spacing_16"
+        android:textAllCaps="false"
+        android:layout_margin="@dimen/spacing_24"
+        app:layout_constraintTop_toBottomOf="@+id/cadastro_de_usuarios_nome_button"
+        />
+
+    <EditText
+        android:id="@+id/cadastro_de_usuarios_senha_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:background="@drawable/edit_text_cadastro_de_usuarios"
+        android:hint="@string/cadastro_de_usuario_senha_edit"
+        android:inputType="numberPassword"
+        android:maxLines="1"
+        android:padding="@dimen/spacing_16"
+        android:layout_margin="@dimen/spacing_24"
+        app:layout_constraintTop_toBottomOf="@+id/cadastro_de_usuarios_email_button"
+        />
+
+    <RadioButton
+        android:id="@+id/cadastro_de_usuarios_admin_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cadastro_de_usuario_admin_radio"
+        android:layout_marginTop="@dimen/spacing_24"
+        android:layout_marginHorizontal="@dimen/spacing_24"
+        app:layout_constraintTop_toBottomOf="@+id/cadastro_de_usuarios_senha_button"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <RadioButton
+        android:id="@+id/cadastro_de_usuarios_user_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cadastro_de_usuario_user_radio"
+        android:layout_margin="@dimen/spacing_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cadastro_de_usuarios_admin_radio"
+        />
+
+    <Button
+        android:id="@+id/cadastro_de_usuarios_salvar_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_24"
+        android:text="@string/cadastro_de_usuario_salvar_button"
+        android:backgroundTint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cadastro_de_usuarios_user_radio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

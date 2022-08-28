@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Cadastro-de-usuario</string>
+    <string name="cadastro_de_usuario_titulo_text">cadastro de usuarios</string>
+
+    <string name="cadastro_de_usuario_nome_edit">nome</string>
+    <string name="cadastro_de_usuario_email_edit">e-mail</string>
+    <string name="cadastro_de_usuario_senha_edit">senha</string>
+
+    <string name="cadastro_de_usuario_admin_radio">Admin</string>
+    <string name="cadastro_de_usuario_user_radio">Usuario</string>
+
+    <string name="cadastro_de_usuario_salvar_button">salvar</string>
+
+</resources>
