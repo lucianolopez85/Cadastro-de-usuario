@@ -1,59 +1,66 @@
-package com.example.cadastro_de_usuario
+package com.example.cadastro_de_usuario.ui.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.example.cadastro_de_usuario.R
+import com.example.cadastro_de_usuario.data.UserManager
+import com.example.cadastro_de_usuario.databinding.FragmentCadastroBinding
+import kotlinx.android.synthetic.main.fragment_cadastro.*
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CadastroFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CadastroFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private lateinit var userManager: UserManager
+    private var _binding: FragmentCadastroBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+        _binding = FragmentCadastroBinding.inflate(inflater, container, false)
+        userManager = UserManager(requireContext())
+
+        setupToolbar()
+        setupButtonSave()
+
+        return binding.root
+    }
+
+    private fun setupToolbar() {
+        binding.iconBack.setOnClickListener {
+            findNavController().navigate(R.id.action_cadastroFragment_to_loginFragment)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cadastro, container, false)
+    private fun setupButtonSave() {
+        binding.buttonCadastroSave.setOnClickListener {
+            val checkedRadioGroup = binding.radioGroupCadastro.checkedRadioButtonId
+            lifecycleScope.launch {
+                userManager.saveValues(
+
+                    edit_cadastro_name.text.toString(),
+                    edit_cadastro_email.text.toString(),
+                    edit_cadastro_password.text.toString().toInt(),
+                    checkedRadioGroup
+                )
+            }
+            if (checkedRadioGroup == R.id.radio_cadastro_admin) {
+                findNavController().navigate(R.id.action_cadastroFragment_to_gestaoFragment)
+            }else {
+                findNavController().navigate(R.id.action_cadastroFragment_to_listaFragment)
+            }
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CadastroFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CadastroFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

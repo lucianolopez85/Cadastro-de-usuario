@@ -1,59 +1,56 @@
-package com.example.cadastro_de_usuario
+package com.example.cadastro_de_usuario.ui.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.example.cadastro_de_usuario.R
+import com.example.cadastro_de_usuario.data.UserManager
+import com.example.cadastro_de_usuario.databinding.FragmentGestaoBinding
+import kotlinx.android.synthetic.main.fragment_gestao.*
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [GestaoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GestaoFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var userManager: UserManager
+    private var _binding: FragmentGestaoBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gestao, container, false)
+        _binding = FragmentGestaoBinding.inflate(inflater, container, false)
+        userManager = UserManager(requireContext())
+
+        binding.iconBack.setOnClickListener {
+            findNavController().navigate(R.id.action_gestaoFragment_to_cadastroFragment)
+        }
+        binding.buttonLista.setOnClickListener {
+            getUserProfile()
+//            findNavController().navigate(R.id.action_gestaoFragment_to_listaFragment)
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GestaoFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            GestaoFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun getUserProfile() {
+        lifecycleScope.launch {
+            userManager.readDataUser().collect{
+                text_nome.text = it.name
+                text_email.text = it.email
+                text_senha.text = it.senha.toString()
+                text_tipo.text = it.tipo.toString()
             }
+        }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 }
