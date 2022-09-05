@@ -1,10 +1,12 @@
 package com.example.cadastro_de_usuario.ui.view
 
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.cadastro_de_usuario.R
@@ -20,15 +22,16 @@ class CadastroFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentCadastroBinding.inflate(inflater, container, false)
         userManager = UserManager(requireContext())
 
         setupToolbar()
         setupButtonSave()
+        dataFocusListener()
 
         return binding.root
     }
@@ -41,22 +44,103 @@ class CadastroFragment : Fragment() {
 
     private fun setupButtonSave() {
         binding.buttonCadastroSave.setOnClickListener {
-            val checkedRadioGroup = binding.radioGroupCadastro.checkedRadioButtonId
-            lifecycleScope.launch {
-                userManager.saveValues(
+            input_layout_name.helperText = validName()
+            input_layout_email.helperText = validEmail()
+            input_layout_senha.helperText = validPassword()
 
-                    edit_cadastro_name.text.toString(),
-                    edit_cadastro_email.text.toString(),
-                    edit_cadastro_password.text.toString().toInt(),
-                    checkedRadioGroup
-                )
-            }
-            if (checkedRadioGroup == R.id.radio_cadastro_admin) {
-                findNavController().navigate(R.id.action_cadastroFragment_to_gestaoFragment)
-            }else {
-                findNavController().navigate(R.id.action_cadastroFragment_to_listaFragment)
+            val validNome = binding.inputLayoutName.helperText == null
+            val validEmail = binding.inputLayoutEmail.helperText == null
+            val validSenha = binding.inputLayoutSenha.helperText == null
+
+            if (validEmail && validSenha && validNome) {
+                ChoiceRoute()
+            } else {
+                setupDialogAlert()
             }
         }
+    }
+
+    private fun ChoiceRoute() {
+        val checkedRadioGroup = binding.radioGroupCadastro.checkedRadioButtonId
+        saveValues(checkedRadioGroup)
+        if (checkedRadioGroup == R.id.radio_cadastro_admin) {
+            findNavController().navigate(R.id.action_cadastroFragment_to_gestaoFragment)
+        } else {
+            findNavController().navigate(R.id.action_cadastroFragment_to_listaFragment)
+        }
+    }
+
+    private fun setupDialogAlert() {
+        var message = ""
+        if (binding.inputLayoutName.helperText != null)
+            message+= "\n" + binding.inputLayoutName.helperText
+        if (binding.inputLayoutEmail.helperText != null)
+            message+= "\n\n" + binding.inputLayoutEmail.helperText
+        if (binding.inputLayoutSenha.helperText != null)
+            message+= "\n\n" + binding.inputLayoutSenha.helperText
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Cadastro Inválido")
+            .setMessage(message)
+            .setPositiveButton("ok") {_,_ -> }
+            .show()
+    }
+
+    private fun saveValues(checkedRadioGroup: Int) {
+        lifecycleScope.launch {
+            userManager.saveValues(
+                edit_cadastro_name.text.toString(),
+                edit_cadastro_email.text.toString(),
+                edit_cadastro_senha.text.toString(),
+                checkedRadioGroup
+            )
+        }
+    }
+
+    private fun dataFocusListener() {
+        binding.editCadastroName.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                input_layout_name.helperText = validName()
+            }
+        }
+        binding.editCadastroEmail.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                input_layout_email.helperText = validEmail()
+            }
+        }
+        binding.editCadastroSenha.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                input_layout_senha.helperText = validPassword()
+            }
+        }
+    }
+
+    private fun validName(): String? {
+        val nomeText = edit_cadastro_name.text.toString()
+        if (nomeText.length <= 10){
+            return "Nome inválido"
+        }
+        return null
+    }
+
+    private fun validEmail(): String? {
+        val emailText = edit_cadastro_email.text.toString()
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()){
+            return "e-mail inválido"
+        }
+        return null
+    }
+
+    private fun validPassword(): String {
+        val senhaText = edit_cadastro_senha.text.toString()
+        if (senhaText.length <= 8) {
+            return "Deve conter mais de 8 caracteres"
+        }else if (!senhaText.matches(".*[A-Z].*".toRegex())) {
+            return "Deve conter no minimo uma letra maiúscula"
+        }else if (!senhaText.matches(".*[1-9].*".toRegex())) {
+            return "Deve conter no minimo um numero"
+        }
+        return ""
     }
 
     override fun onDestroy() {

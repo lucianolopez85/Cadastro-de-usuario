@@ -8,6 +8,7 @@
     <string name="cadastro_admin">Admin</string>
     <string name="cadastro_user">Usuario</string>
     <string name="cadastro_salvar">salvar</string>
+    <string name="cadastro_required">Required</string>
 
 
     <string name="login_email">e-mail</string>

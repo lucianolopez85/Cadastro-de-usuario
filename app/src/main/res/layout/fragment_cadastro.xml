@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.CadastroFragment">
 
-
     <ImageView
         android:id="@+id/icon_back"
         android:layout_width="24dp"
@@ -29,110 +28,96 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/edit_cadastro_name"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_cadastro_de_usuarios"
-        android:hint="@string/cadastro_nome"
-        android:inputType="none"
-        android:maxLines="1"
-        android:padding="@dimen/spacing_16"
-        android:layout_marginTop="@dimen/spacing_100"
-        android:textAllCaps="false"
-        android:layout_marginHorizontal="@dimen/spacing_24"
-        app:layout_constraintTop_toBottomOf="@+id/text_title"
+        android:layout_margin="@dimen/spacing_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/text_title"
+        app:helperText="@string/cadastro_required"
+        app:helperTextTextColor="@android:color/holo_red_light">
 
-    <EditText
-        android:id="@+id/edit_cadastro_email"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_cadastro_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="1"
+            android:hint="@string/cadastro_nome" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_cadastro_de_usuarios"
-        android:hint="@string/cadastro_email"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:padding="@dimen/spacing_16"
-        android:textAllCaps="false"
         android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintTop_toBottomOf="@+id/edit_cadastro_name"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_layout_name"
+        app:helperText="@string/cadastro_required"
+        app:helperTextTextColor="@android:color/holo_red_light">
 
-    <EditText
-        android:id="@+id/edit_cadastro_password"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_cadastro_email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textEmailAddress"
+            android:lines="1"
+            android:hint="@string/cadastro_email" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_senha"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:background="@drawable/edit_text_cadastro_de_usuarios"
-        android:hint="@string/cadastro_senha"
-        android:inputType="numberPassword"
-        android:maxLines="1"
-        android:padding="@dimen/spacing_16"
         android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintTop_toBottomOf="@+id/edit_cadastro_email"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_layout_email"
+        app:helperText="@string/cadastro_required"
+        app:helperTextTextColor="@android:color/holo_red_light">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_cadastro_senha"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:lines="1"
+            android:hint="@string/cadastro_senha" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
         android:id="@+id/radio_group_cadastro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintTop_toBottomOf="@+id/edit_cadastro_password"
+        app:layout_constraintTop_toBottomOf="@+id/input_layout_senha"
         app:layout_constraintStart_toStartOf="parent"
-        >
+        android:orientation="horizontal">
+
         <RadioButton
             android:id="@+id/radio_cadastro_admin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cadastro_admin"
-            />
+            android:text="@string/cadastro_admin" />
 
         <RadioButton
             android:id="@+id/radio_cadastro_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cadastro_user"
-            />
-
+            android:checked="true"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:text="@string/cadastro_user" />
 
     </RadioGroup>
-
-
-
-    <TextView
-        android:id="@+id/text_cadastro_alert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radio_group_cadastro"
-        />
-    <TextView
-        android:id="@+id/text_cadastro_alert_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_cadastro_alert"
-        />
-    <TextView
-        android:id="@+id/text_cadastro_alert_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_cadastro_alert_2"
-        />
-    <TextView
-        android:id="@+id/text_cadastro_alert_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_cadastro_alert_3"
-        />
 
     <Button
         android:id="@+id/button_cadastro_save"
@@ -142,10 +127,6 @@
         android:text="@string/cadastro_salvar"
         android:backgroundTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radio_group_cadastro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/radio_group_cadastro" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

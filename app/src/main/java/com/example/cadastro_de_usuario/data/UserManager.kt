@@ -13,11 +13,11 @@ class UserManager(val context: Context) {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "USER_PREFERENCES_NAME")
     }
 
-    suspend fun saveValues( nome: String, email: String, senha: Int, tipo: Int) {
-        context?.dataStore?.edit { preferences ->
+    suspend fun saveValues(nome: String, email: String, senha: String, tipo: Int) {
+        context.dataStore.edit { preferences ->
             preferences[stringPreferencesKey("NOME")] = nome
             preferences[stringPreferencesKey("EMAIL")] = email
-            preferences[intPreferencesKey("SENHA")] = senha
+            preferences[stringPreferencesKey("SENHA")] = senha
             preferences[intPreferencesKey("TIPO")] = tipo
         }
     }
@@ -26,8 +26,8 @@ class UserManager(val context: Context) {
         User(
             name = preferences[stringPreferencesKey("NOME")].orEmpty(),
             email = preferences[stringPreferencesKey("EMAIL")].orEmpty(),
-            senha = preferences[intPreferencesKey("SENHA")]?: 0,
-            tipo = preferences[intPreferencesKey("TIPO")]?: 0
+            senha = preferences[stringPreferencesKey("SENHA")].orEmpty(),
+            tipo = preferences[intPreferencesKey("TIPO")]?:0,
         )
     }
 }
