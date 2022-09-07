@@ -19,6 +19,7 @@
         android:id="@+id/text_title"
         android:layout_width="match_parent"
         style="@style/TextAppearance.Material3.BodyLarge"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:text="@string/lista_title"
         android:textAllCaps="true"

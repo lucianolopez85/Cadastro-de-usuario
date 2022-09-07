@@ -23,4 +23,7 @@
 
     <string name="lista_title">lista de repositorios</string>
 
+    <string name="item_editar">Editar</string>
+    <string name="item_excluir">Excluir</string>
+
 </resources>

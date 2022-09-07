@@ -20,6 +20,7 @@
         android:id="@+id/text_title"
         android:layout_width="match_parent"
         style="@style/TextAppearance.Material3.BodyLarge"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:text="@string/gestao_title"
         android:textAllCaps="true"
@@ -29,48 +30,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_nome"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewListUser"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_marginTop="@dimen/spacing_50"
+        app:layout_constraintTop_toTopOf="@+id/text_title"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintTop_toBottomOf="@+id/text_title"
-        tools:text="NOME"
-        />
+        tools:layout="@layout/item_usuario"
+        android:orientation="vertical"
 
-    <TextView
-        android:id="@+id/text_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TextAppearance.Material3.BodyLarge"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintTop_toBottomOf="@+id/text_nome"
-        tools:text="EMAIL"
-        />
-
-    <TextView
-        android:id="@+id/text_senha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TextAppearance.Material3.BodyLarge"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintTop_toBottomOf="@+id/text_email"
-        tools:text="SENHA"
-        />
-
-    <TextView
-        android:id="@+id/text_tipo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TextAppearance.Material3.BodyLarge"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintTop_toBottomOf="@+id/text_senha"
-        tools:text="TIPO"
         />
 
     <Button
