@@ -44,8 +44,8 @@ class GestaoFragment : Fragment() {
         layoutManager = LinearLayoutManager(requireContext())
         setHasFixedSize(true)
         lifecycleScope.launch {
+            userList = ArrayList()
             userManager.readDataUser().collect{
-                userList = ArrayList()
                 userList.add(
                     User(name = it.name, email = it.email, senha = it.senha, tipo = it.tipo)
                 )
