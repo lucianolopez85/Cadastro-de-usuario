@@ -5,20 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cadastro_de_usuario.R
-import com.example.cadastro_de_usuario.data.User
-import com.example.cadastro_de_usuario.data.UserManager
+import com.example.cadastro_de_usuario.data.DataBaseSQLite
 import com.example.cadastro_de_usuario.databinding.FragmentGestaoBinding
 import com.example.cadastro_de_usuario.ui.adapter.ListAdapter
-import kotlinx.coroutines.launch
 
 class GestaoFragment : Fragment() {
 
-    private lateinit var userManager: UserManager
-    private lateinit var userList : ArrayList<User>
+    private lateinit var dataBaseSQLite: DataBaseSQLite
+    private lateinit var listAdapter: ListAdapter
     private var _binding: FragmentGestaoBinding? = null
     private val binding get() = _binding!!
 
@@ -27,7 +24,8 @@ class GestaoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentGestaoBinding.inflate(inflater, container, false)
-        userManager = UserManager(requireContext())
+        dataBaseSQLite = DataBaseSQLite(requireContext())
+        listAdapter = ListAdapter(dataBaseSQLite.getListUser())
 
         binding.iconBack.setOnClickListener {
             findNavController().navigate(R.id.action_gestaoFragment_to_cadastroFragment)
@@ -43,15 +41,7 @@ class GestaoFragment : Fragment() {
     private fun setupRecyclerView() = with(binding.recyclerViewListUser) {
         layoutManager = LinearLayoutManager(requireContext())
         setHasFixedSize(true)
-        lifecycleScope.launch {
-            userList = ArrayList()
-            userManager.readDataUser().collect{
-                userList.add(
-                    User(name = it.name, email = it.email, senha = it.senha, tipo = it.tipo)
-                )
-            }
-        }
-        adapter = ListAdapter(userList)
+        adapter = listAdapter
     }
 
     override fun onDestroy() {

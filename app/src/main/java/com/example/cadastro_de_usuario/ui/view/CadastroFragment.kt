@@ -7,17 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.cadastro_de_usuario.R
-import com.example.cadastro_de_usuario.data.UserManager
+import com.example.cadastro_de_usuario.data.DataBaseSQLite
+import com.example.cadastro_de_usuario.data.User
 import com.example.cadastro_de_usuario.databinding.FragmentCadastroBinding
 import kotlinx.android.synthetic.main.fragment_cadastro.*
-import kotlinx.coroutines.launch
 
 class CadastroFragment : Fragment() {
 
-    private lateinit var userManager: UserManager
+    private lateinit var dataBaseSQLite: DataBaseSQLite
     private var _binding: FragmentCadastroBinding? = null
     private val binding get() = _binding!!
 
@@ -27,7 +26,7 @@ class CadastroFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCadastroBinding.inflate(inflater, container, false)
-        userManager = UserManager(requireContext())
+        dataBaseSQLite = DataBaseSQLite(requireContext())
 
         setupToolbar()
         setupButtonSave()
@@ -62,7 +61,7 @@ class CadastroFragment : Fragment() {
 
     private fun ChoiceRoute() {
         val checkedRadioGroup = binding.radioGroupCadastro.checkedRadioButtonId
-        saveValues(checkedRadioGroup)
+        saveValuesDataBase(checkedRadioGroup)
         if (checkedRadioGroup == R.id.radio_cadastro_admin) {
             findNavController().navigate(R.id.action_cadastroFragment_to_gestaoFragment)
         } else {
@@ -86,15 +85,17 @@ class CadastroFragment : Fragment() {
             .show()
     }
 
-    private fun saveValues(checkedRadioGroup: Int) {
-        lifecycleScope.launch {
-            userManager.saveValues(
-                edit_cadastro_name.text.toString(),
-                edit_cadastro_email.text.toString(),
-                edit_cadastro_senha.text.toString(),
-                checkedRadioGroup
+    private fun saveValuesDataBase(checkedRadioGroup: Int) {
+        val cont = dataBaseSQLite.getListUser().size
+        dataBaseSQLite.addUser(
+            user = User(
+                id = cont + 1,
+                name = edit_cadastro_name.text.toString(),
+                email = edit_cadastro_email.text.toString(),
+                password = edit_cadastro_senha.text.toString(),
+                type = checkedRadioGroup
             )
-        }
+        )
     }
 
     private fun dataFocusListener() {

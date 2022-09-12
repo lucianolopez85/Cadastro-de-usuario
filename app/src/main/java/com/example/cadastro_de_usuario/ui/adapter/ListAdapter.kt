@@ -1,15 +1,17 @@
 package com.example.cadastro_de_usuario.ui.adapter
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cadastro_de_usuario.R
+import com.example.cadastro_de_usuario.data.DataBaseSQLite
 import com.example.cadastro_de_usuario.data.User
 
 class ListAdapter(
-    private val userList: ArrayList<User>
+    private var userList: List<User>
 ) : RecyclerView.Adapter<ListAdapter.AdapterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterViewHolder {
@@ -18,19 +20,34 @@ class ListAdapter(
     }
 
     override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
-        val user = userList[position]
-        holder.textName.text = user.name
-        holder.textEmail.text = user.email
-        holder.TextSenha.text = user.senha
-        holder.TextTipo.text = user.tipo.toString()
+        holder.textName.text = userList[position].name
+
+        holder.textEdit.setOnClickListener {
+            val dialogAlertDialog = AlertDialog.Builder(it.rootView.context)
+            with(dialogAlertDialog) {
+                setTitle("Editar Contato")
+                setMessage("id: ${userList[position].id} \nNome: ${userList[position].name}")
+                setPositiveButton("ok") {_,_ -> }
+                show()
+            }
+        }
+
+        holder.textDelete.setOnClickListener {
+            val dialogAlertDialog = AlertDialog.Builder(it.rootView.context)
+            with(dialogAlertDialog) {
+                setTitle("Excluir Contato")
+                setMessage("id: ${userList[position].id} \nNome: ${userList[position].name}")
+                setPositiveButton("ok") {_,_ -> }
+                show()
+            }
+        }
     }
 
     override fun getItemCount() = userList.size
 
     class AdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textName = itemView.findViewById<TextView>(R.id.text_item_name)
-        val textEmail = itemView.findViewById<TextView>(R.id.text_item_email)
-        val TextSenha = itemView.findViewById<TextView>(R.id.text_item_senha)
-        val TextTipo = itemView.findViewById<TextView>(R.id.text_item_tipo)
+        val textEdit = itemView.findViewById<TextView>(R.id.text_item_editar)
+        val textDelete = itemView.findViewById<TextView>(R.id.text_item_excluir)
     }
 }
