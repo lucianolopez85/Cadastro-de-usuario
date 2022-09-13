@@ -75,7 +75,6 @@ class DataBaseSQLite(context: Context): SQLiteOpenHelper(context, db_NAME, null,
             put(NAME, user.name)
             put(EMAIL, user.email)
             put(PASSWORD, user.password)
-            put(USER_TYPE, user.type.toString())
         }
         db.update(TABLE_NAME, values, "$ID=?", arrayOf(user.id.toString()))
     }

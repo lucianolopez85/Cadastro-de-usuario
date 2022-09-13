@@ -9,10 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cadastro_de_usuario.R
 import com.example.cadastro_de_usuario.data.DataBaseSQLite
 import com.example.cadastro_de_usuario.data.User
+import com.example.cadastro_de_usuario.databinding.DialogAlertDeleteBinding
+import com.example.cadastro_de_usuario.databinding.DialogAlertEditBinding
 
 class ListAdapter(
     private var userList: List<User>
 ) : RecyclerView.Adapter<ListAdapter.AdapterViewHolder>() {
+
+    lateinit var dataBaseSQLite: DataBaseSQLite
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_usuario, parent, false)
@@ -22,24 +26,12 @@ class ListAdapter(
     override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
         holder.textName.text = userList[position].name
 
-        holder.textEdit.setOnClickListener {
-            val dialogAlertDialog = AlertDialog.Builder(it.rootView.context)
-            with(dialogAlertDialog) {
-                setTitle("Editar Contato")
-                setMessage("id: ${userList[position].id} \nNome: ${userList[position].name}")
-                setPositiveButton("ok") {_,_ -> }
-                show()
-            }
+        holder.textDelete.setOnClickListener { view ->
+            deleteUser(view, position)
         }
 
-        holder.textDelete.setOnClickListener {
-            val dialogAlertDialog = AlertDialog.Builder(it.rootView.context)
-            with(dialogAlertDialog) {
-                setTitle("Excluir Contato")
-                setMessage("id: ${userList[position].id} \nNome: ${userList[position].name}")
-                setPositiveButton("ok") {_,_ -> }
-                show()
-            }
+        holder.textEdit.setOnClickListener { view ->
+            editUser(view, position)
         }
     }
 
@@ -50,4 +42,38 @@ class ListAdapter(
         val textEdit = itemView.findViewById<TextView>(R.id.text_item_editar)
         val textDelete = itemView.findViewById<TextView>(R.id.text_item_excluir)
     }
+
+    fun deleteUser(view: View, position: Int) {
+        val build = AlertDialog.Builder(view.context, R.style.ThemeCustomDialog)
+        val dialogBinding = DialogAlertDeleteBinding
+            .inflate(LayoutInflater.from(view.context))
+        dialogBinding.textDialogName.text = userList[position].name
+
+        dialogBinding.buttonDialogDelete.setOnClickListener {
+            dataBaseSQLite = DataBaseSQLite(it.context)
+            dataBaseSQLite.delUser(userList[position].id)
+        }
+        build.setView(dialogBinding.root)
+        build.show()
+    }
+
+    fun editUser(view: View, position: Int) {
+        val build = AlertDialog.Builder(view.context, R.style.ThemeCustomDialog)
+        val dialogBinding = DialogAlertEditBinding
+            .inflate(LayoutInflater.from(view.context))
+        dialogBinding.buttonDialogEdit.setOnClickListener {
+            dataBaseSQLite = DataBaseSQLite(it.context)
+            dataBaseSQLite.updateUser(
+                User(
+                    id = userList[position].id,
+                    name = dialogBinding.editDialogName.text.toString(),
+                    email = dialogBinding.editDialogEmail.text.toString(),
+                    password = dialogBinding.editDialogSenha.text.toString(),
+                )
+            )
+        }
+        build.setView(dialogBinding.root)
+        build.show()
+    }
+
 }
