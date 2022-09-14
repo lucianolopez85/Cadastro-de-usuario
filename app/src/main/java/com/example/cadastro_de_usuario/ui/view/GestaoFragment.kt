@@ -48,5 +48,4 @@ class GestaoFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-
 }

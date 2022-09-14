@@ -1,6 +1,7 @@
 package com.example.cadastro_de_usuario.ui.adapter
 
 import android.app.AlertDialog
+import android.sax.StartElementListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +12,14 @@ import com.example.cadastro_de_usuario.data.DataBaseSQLite
 import com.example.cadastro_de_usuario.data.User
 import com.example.cadastro_de_usuario.databinding.DialogAlertDeleteBinding
 import com.example.cadastro_de_usuario.databinding.DialogAlertEditBinding
+import com.example.cadastro_de_usuario.ui.view.GestaoFragment
 
 class ListAdapter(
     private var userList: List<User>
 ) : RecyclerView.Adapter<ListAdapter.AdapterViewHolder>() {
 
     lateinit var dataBaseSQLite: DataBaseSQLite
+    private lateinit var dialog: AlertDialog
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_usuario, parent, false)
@@ -52,9 +55,12 @@ class ListAdapter(
         dialogBinding.buttonDialogDelete.setOnClickListener {
             dataBaseSQLite = DataBaseSQLite(it.context)
             dataBaseSQLite.delUser(userList[position].id)
+            dialog.dismiss()
         }
+
         build.setView(dialogBinding.root)
-        build.show()
+        dialog = build.create()
+        dialog.show()
     }
 
     fun editUser(view: View, position: Int) {
@@ -71,9 +77,12 @@ class ListAdapter(
                     password = dialogBinding.editDialogSenha.text.toString(),
                 )
             )
+            dialog.dismiss()
         }
+
         build.setView(dialogBinding.root)
-        build.show()
+        dialog = build.create()
+        dialog.show()
     }
 
 }
