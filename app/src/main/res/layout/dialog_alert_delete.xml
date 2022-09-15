@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     android:background="@drawable/custom_dialog">
 
     <TextView
@@ -34,12 +34,13 @@
         android:id="@+id/button_dialog_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/custom_button"
-        android:textColor="@color/white"
         android:layout_margin="@dimen/spacing_24"
-        app:backgroundTint="@null"
+        android:background="@drawable/custom_button"
         android:text="Excluir"
-        app:layout_constraintTop_toBottomOf="@+id/text_dialog_name"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_dialog_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

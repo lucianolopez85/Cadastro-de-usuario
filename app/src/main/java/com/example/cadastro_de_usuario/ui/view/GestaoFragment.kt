@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cadastro_de_usuario.R
 import com.example.cadastro_de_usuario.data.DataBaseSQLite
+import com.example.cadastro_de_usuario.data.User
 import com.example.cadastro_de_usuario.databinding.FragmentGestaoBinding
 import com.example.cadastro_de_usuario.ui.adapter.ListAdapter
 
@@ -25,7 +26,9 @@ class GestaoFragment : Fragment() {
     ): View? {
         _binding = FragmentGestaoBinding.inflate(inflater, container, false)
         dataBaseSQLite = DataBaseSQLite(requireContext())
-        listAdapter = ListAdapter(dataBaseSQLite.getListUser())
+        listAdapter = ListAdapter(dataBaseSQLite.getListUser()) {
+
+        }
 
         binding.iconBack.setOnClickListener {
             findNavController().navigate(R.id.action_gestaoFragment_to_cadastroFragment)

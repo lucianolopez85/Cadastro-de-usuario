@@ -1,7 +1,6 @@
 package com.example.cadastro_de_usuario.ui.adapter
 
 import android.app.AlertDialog
-import android.sax.StartElementListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +11,11 @@ import com.example.cadastro_de_usuario.data.DataBaseSQLite
 import com.example.cadastro_de_usuario.data.User
 import com.example.cadastro_de_usuario.databinding.DialogAlertDeleteBinding
 import com.example.cadastro_de_usuario.databinding.DialogAlertEditBinding
-import com.example.cadastro_de_usuario.ui.view.GestaoFragment
+import com.example.cadastro_de_usuario.databinding.DialogAlertUserBinding
 
 class ListAdapter(
-    private var userList: List<User>
+    private var userList: List<User>,
+    private var updatedList: ((List<User>) -> Unit)
 ) : RecyclerView.Adapter<ListAdapter.AdapterViewHolder>() {
 
     lateinit var dataBaseSQLite: DataBaseSQLite
@@ -29,12 +29,16 @@ class ListAdapter(
     override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
         holder.textName.text = userList[position].name
 
+        holder.textName.setOnClickListener { view ->
+            showUser(view, position)
+        }
+
         holder.textDelete.setOnClickListener { view ->
             deleteUser(view, position)
         }
 
         holder.textEdit.setOnClickListener { view ->
-            editUser(view, position)
+            editUser(view, position )
         }
     }
 
@@ -46,19 +50,31 @@ class ListAdapter(
         val textDelete = itemView.findViewById<TextView>(R.id.text_item_excluir)
     }
 
+    fun showUser(view: View, position: Int) {
+        val build = AlertDialog.Builder(view.context, R.style.ThemeCustomDialog)
+        val dialogBinding = DialogAlertUserBinding
+            .inflate(LayoutInflater.from(view.context))
+        dialogBinding.textDialogName.text = userList[position].name
+        dialogBinding.textDialogEmail.text = userList[position].email
+        dialogBinding.textDialogSenha.text = userList[position].password
+        build.setView(dialogBinding.root)
+        dialogBinding.iconClose.setOnClickListener { dialog.dismiss() }
+        dialog = build.create()
+        dialog.show()
+    }
+
     fun deleteUser(view: View, position: Int) {
         val build = AlertDialog.Builder(view.context, R.style.ThemeCustomDialog)
         val dialogBinding = DialogAlertDeleteBinding
             .inflate(LayoutInflater.from(view.context))
         dialogBinding.textDialogName.text = userList[position].name
 
+        build.setView(dialogBinding.root)
         dialogBinding.buttonDialogDelete.setOnClickListener {
             dataBaseSQLite = DataBaseSQLite(it.context)
             dataBaseSQLite.delUser(userList[position].id)
             dialog.dismiss()
         }
-
-        build.setView(dialogBinding.root)
         dialog = build.create()
         dialog.show()
     }
@@ -77,8 +93,10 @@ class ListAdapter(
                     password = dialogBinding.editDialogSenha.text.toString(),
                 )
             )
+            updatedList(dataBaseSQLite.getListUser())
             dialog.dismiss()
         }
+
 
         build.setView(dialogBinding.root)
         dialog = build.create()
