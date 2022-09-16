@@ -10,10 +10,10 @@
         android:id="@+id/text_dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Editar usuário"
+        android:text="@string/dialog_edit_title"
         android:textColor="@color/black"
         android:textAlignment="center"
-        android:textSize="@dimen/spacing_24"
+        android:textSize="24sp"
         android:layout_marginTop="@dimen/spacing_24"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:lines="1"
-            android:hint="Nome"/>
+            android:hint="@string/hint_name"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,7 +58,7 @@
             android:layout_height="match_parent"
             android:inputType="textEmailAddress"
             android:lines="1"
-            android:hint="email"/>
+            android:hint="@string/hint_email"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,7 +81,7 @@
             android:inputType="textPassword"
             android:maxLength="16"
             android:lines="1"
-            android:hint="Senha"/>
+            android:hint="@string/hint_senha"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_24"
         android:background="@drawable/custom_button"
-        android:text="salvar"
+        android:text="@string/dialog_edit_button"
         android:textColor="@color/white"
         app:backgroundTint="@null"
         android:layout_marginBottom="@dimen/spacing_24"

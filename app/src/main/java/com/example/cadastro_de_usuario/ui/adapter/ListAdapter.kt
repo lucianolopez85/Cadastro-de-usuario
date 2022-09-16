@@ -14,8 +14,7 @@ import com.example.cadastro_de_usuario.databinding.DialogAlertEditBinding
 import com.example.cadastro_de_usuario.databinding.DialogAlertUserBinding
 
 class ListAdapter(
-    private var userList: List<User>,
-    private var updatedList: ((List<User>) -> Unit)
+    private var userList: List<User>
 ) : RecyclerView.Adapter<ListAdapter.AdapterViewHolder>() {
 
     lateinit var dataBaseSQLite: DataBaseSQLite
@@ -54,9 +53,9 @@ class ListAdapter(
         val build = AlertDialog.Builder(view.context, R.style.ThemeCustomDialog)
         val dialogBinding = DialogAlertUserBinding
             .inflate(LayoutInflater.from(view.context))
-        dialogBinding.textDialogName.text = userList[position].name
-        dialogBinding.textDialogEmail.text = userList[position].email
-        dialogBinding.textDialogSenha.text = userList[position].password
+        dialogBinding.textDialogName.text = "Nome: ${userList[position].name}"
+        dialogBinding.textDialogEmail.text = "e-mail: ${userList[position].email}"
+        dialogBinding.textDialogSenha.text = "Senha: ${userList[position].password}"
         build.setView(dialogBinding.root)
         dialogBinding.iconClose.setOnClickListener { dialog.dismiss() }
         dialog = build.create()
@@ -68,12 +67,13 @@ class ListAdapter(
         val dialogBinding = DialogAlertDeleteBinding
             .inflate(LayoutInflater.from(view.context))
         dialogBinding.textDialogName.text = userList[position].name
-
         build.setView(dialogBinding.root)
         dialogBinding.buttonDialogDelete.setOnClickListener {
             dataBaseSQLite = DataBaseSQLite(it.context)
             dataBaseSQLite.delUser(userList[position].id)
+            userList = dataBaseSQLite.getListUser()
             dialog.dismiss()
+            notifyDataSetChanged()
         }
         dialog = build.create()
         dialog.show()
@@ -83,24 +83,22 @@ class ListAdapter(
         val build = AlertDialog.Builder(view.context, R.style.ThemeCustomDialog)
         val dialogBinding = DialogAlertEditBinding
             .inflate(LayoutInflater.from(view.context))
+        build.setView(dialogBinding.root)
         dialogBinding.buttonDialogEdit.setOnClickListener {
             dataBaseSQLite = DataBaseSQLite(it.context)
             dataBaseSQLite.updateUser(
                 User(
                     id = userList[position].id,
-                    name = dialogBinding.editDialogName.text.toString(),
-                    email = dialogBinding.editDialogEmail.text.toString(),
-                    password = dialogBinding.editDialogSenha.text.toString(),
+                    name = "Nome: ${dialogBinding.editDialogName.text.toString()}",
+                    email = "e-mail: ${dialogBinding.editDialogEmail.text.toString()}",
+                    password = "Senha: ${dialogBinding.editDialogSenha.text.toString()}"
                 )
             )
-            updatedList(dataBaseSQLite.getListUser())
+            userList = dataBaseSQLite.getListUser()
             dialog.dismiss()
+            notifyDataSetChanged()
         }
-
-
-        build.setView(dialogBinding.root)
         dialog = build.create()
         dialog.show()
     }
-
 }

@@ -10,7 +10,6 @@
     <string name="cadastro_salvar">salvar</string>
     <string name="cadastro_required">Required</string>
 
-
     <string name="login_email">e-mail</string>
     <string name="login_senha">senha</string>
     <string name="login_entrar">entrar</string>
@@ -25,5 +24,15 @@
 
     <string name="item_editar">Editar</string>
     <string name="item_excluir">Excluir</string>
+
+    <string name="dialog_delete_title">Excluir usuário?</string>
+    <string name="dialog_delete_button">Excluir</string>
+
+    <string name="dialog_edit_title">Editar usuário</string>
+    <string name="dialog_edit_button">salvar</string>
+
+    <string name="hint_name">Nome</string>
+    <string name="hint_email">email</string>
+    <string name="hint_senha">Senha</string>
 
 </resources>
