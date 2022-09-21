@@ -1,10 +1,10 @@
 package com.example.cadastro_de_usuario.ui.viewmodel
 
 import androidx.lifecycle.*
-import com.example.cadastro_de_usuario.data.DataBaseSQLite
-import com.example.cadastro_de_usuario.data.UserDataVO
+import com.example.cadastro_de_usuario.data.dbsqlite.DataBaseSQLite
+import com.example.cadastro_de_usuario.domain.vo.UserDataVO
 
-internal class GestaoViewModel(
+internal class UserManagementViewModel(
     private val dataBaseSQLite: DataBaseSQLite
 ) : ViewModel() {
 

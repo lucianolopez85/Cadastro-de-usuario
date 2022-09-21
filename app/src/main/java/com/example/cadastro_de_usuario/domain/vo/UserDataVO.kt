@@ -1,4 +1,4 @@
-package com.example.cadastro_de_usuario.data
+package com.example.cadastro_de_usuario.domain.vo
 
 data class UserDataVO(
     var id: Int = 0,

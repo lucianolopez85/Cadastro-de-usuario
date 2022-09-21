@@ -9,15 +9,15 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.cadastro_de_usuario.R
-import com.example.cadastro_de_usuario.data.DataBaseSQLite
-import com.example.cadastro_de_usuario.data.UserDataVO
-import com.example.cadastro_de_usuario.databinding.FragmentCadastroBinding
-import kotlinx.android.synthetic.main.fragment_cadastro.*
+import com.example.cadastro_de_usuario.data.dbsqlite.DataBaseSQLite
+import com.example.cadastro_de_usuario.databinding.FragmentRegisterBinding
+import com.example.cadastro_de_usuario.domain.vo.UserDataVO
+import kotlinx.android.synthetic.main.fragment_register.*
 
-class CadastroFragment : Fragment() {
+class RegisterFragment : Fragment() {
 
     private lateinit var dataBaseSQLite: DataBaseSQLite
-    private var _binding: FragmentCadastroBinding? = null
+    private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,7 +25,7 @@ class CadastroFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCadastroBinding.inflate(inflater, container, false)
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         dataBaseSQLite = DataBaseSQLite(requireContext())
 
         setupToolbar()

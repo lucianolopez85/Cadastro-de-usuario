@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    >
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/avatar"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/RoundCorner" />
+
+    <TextView
+        android:id="@+id/item_repository_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginEnd="@dimen/spacing_8"
+        android:layout_marginStart="@dimen/spacing_8"
+        app:layout_constraintTop_toTopOf="@+id/avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/avatar"
+        tools:text="Kevin Naughton Jr."/>
+
+    <TextView
+        android:id="@+id/item_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="5"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintEnd_toEndOf="@+id/item_repository_name"
+        app:layout_constraintStart_toStartOf="@+id/item_repository_name"
+        app:layout_constraintTop_toBottomOf="@+id/item_repository_name"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie, urna varius rhoncus auctor, lectus justo vehicula leo, ut dictum sem nisi ac leo. Quisque neque diam, volutpat non urna non, commodo varius mi. Nunc dictum maximus turpis, ut sagittis velit. Cras eget risus scelerisque, ornare urna at, fringilla dolor." />
+
+    <ImageView
+        android:id="@+id/icon_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_8"
+        android:src="@drawable/icon_star"
+        android:layout_marginBottom="@dimen/spacing_4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/avatar" />
+
+    <TextView
+        android:id="@+id/text_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="55,6k"
+        android:layout_marginBottom="@dimen/spacing_6"
+        app:layout_constraintStart_toEndOf="@+id/icon_star"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        />
+
+    <ImageView
+        android:id="@+id/icon_fork"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:src="@drawable/icon_fork"
+        android:layout_marginBottom="@dimen/spacing_4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/text_icon" />
+
+    <TextView
+        android:id="@+id/text_fork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="41,3k"
+        android:layout_marginBottom="@dimen/spacing_6"
+        app:layout_constraintStart_toEndOf="@+id/icon_fork"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="@color/linear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

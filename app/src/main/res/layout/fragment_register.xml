@@ -21,7 +21,7 @@
         style="@style/TextAppearance.Material3.BodyLarge"
         android:textStyle="bold"
         android:layout_height="wrap_content"
-        android:text="@string/cadastro_de_usuario_titulo_text"
+        android:text="@string/register_user_title"
         android:textAllCaps="true"
         android:gravity="center"
         android:layout_margin="@dimen/spacing_24"
@@ -38,7 +38,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_title"
-        app:helperText="@string/cadastro_required"
+        app:helperText="@string/register_required"
         app:helperTextTextColor="@android:color/holo_red_light">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:lines="1"
-            android:hint="@string/cadastro_nome" />
+            android:hint="@string/register_name" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,7 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_layout_name"
-        app:helperText="@string/cadastro_required"
+        app:helperText="@string/register_required"
         app:helperTextTextColor="@android:color/holo_red_light">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -68,7 +68,7 @@
             android:layout_height="match_parent"
             android:inputType="textEmailAddress"
             android:lines="1"
-            android:hint="@string/cadastro_email" />
+            android:hint="@string/register_email" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,7 +81,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_layout_email"
-        app:helperText="@string/cadastro_required"
+        app:helperText="@string/register_required"
         app:helperTextTextColor="@android:color/holo_red_light">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -91,7 +91,7 @@
             android:inputType="textPassword"
             android:maxLength="16"
             android:lines="1"
-            android:hint="@string/cadastro_senha" />
+            android:hint="@string/register_password" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,7 +108,7 @@
             android:id="@+id/radio_cadastro_admin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cadastro_admin" />
+            android:text="@string/register_admin" />
 
         <RadioButton
             android:id="@+id/radio_cadastro_user"
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:layout_marginStart="@dimen/spacing_24"
-            android:text="@string/cadastro_user" />
+            android:text="@string/register_user" />
 
     </RadioGroup>
 
@@ -125,7 +125,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_24"
-        android:text="@string/cadastro_salvar"
+        android:text="@string/register_save"
         android:backgroundTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/radio_group_cadastro" />

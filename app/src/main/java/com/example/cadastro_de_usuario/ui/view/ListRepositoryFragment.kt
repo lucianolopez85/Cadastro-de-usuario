@@ -5,13 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import com.example.cadastro_de_usuario.R
 
 
-class ListaFragment : Fragment() {
+class ListRepositoryFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -19,7 +18,7 @@ class ListaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_lista, container, false)
+        val view = inflater.inflate(R.layout.fragment_list_repository, container, false)
         val button = view.findViewById<ImageView>(R.id.icon_back)
 
         button.setOnClickListener {

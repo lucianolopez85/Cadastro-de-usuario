@@ -11,8 +11,11 @@
         <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/drawable/custom_dialog.xml" value="0.1895" />
         <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/drawable/dialog_delete.xml" value="0.2215" />
         <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/drawable/edit_text_cadastro_de_usuarios.xml" value="0.196" />
+        <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2385" />
         <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/drawable/icon_back.xml" value="0.29" />
         <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/drawable/icon_close.xml" value="0.2065" />
+        <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/drawable/icon_fork.xml" value="0.296" />
+        <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/drawable/icon_star.xml" value="0.3525" />
         <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/layout/activity_cadastro_de_usuarios.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/layout/custom_button_sheet.xml" value="0.5504132231404959" />
@@ -24,6 +27,9 @@
         <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/layout/fragment_gestao.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/layout/fragment_lista.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/layout/fragment_register.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/layout/item_repository.xml" value="0.5852090032154341" />
+        <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/layout/item_user.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/lopez/AndroidStudioProjects/Cadastrodeusuario/app/src/main/res/layout/item_usuario.xml" value="0.695697796432319" />
       </map>
     </option>

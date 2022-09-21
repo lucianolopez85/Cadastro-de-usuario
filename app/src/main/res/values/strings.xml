@@ -1,29 +1,29 @@
 <resources>
     <string name="app_name">Cadastro-de-usuario</string>
-    <string name="cadastro_de_usuario_titulo_text">cadastro de usuarios</string>
+    <string name="register_user_title">cadastro de usuarios</string>
 
-    <string name="cadastro_nome">nome</string>
-    <string name="cadastro_email">e-mail</string>
-    <string name="cadastro_senha">senha</string>
-    <string name="cadastro_admin">Admin</string>
-    <string name="cadastro_user">Usuario</string>
-    <string name="cadastro_salvar">salvar</string>
-    <string name="cadastro_required">Required</string>
+    <string name="register_name">nome</string>
+    <string name="register_email">e-mail</string>
+    <string name="register_password">senha</string>
+    <string name="register_admin">Admin</string>
+    <string name="register_user">Usuario</string>
+    <string name="register_save">salvar</string>
+    <string name="register_required">Required</string>
 
     <string name="login_email">e-mail</string>
-    <string name="login_senha">senha</string>
-    <string name="login_entrar">entrar</string>
-    <string name="login_efetuar_cadastro">Efetuar cadastro, clique aqui.</string>
+    <string name="login_password">senha</string>
+    <string name="login_enter">entrar</string>
+    <string name="login_register">Efetuar cadastro, clique aqui.</string>
 
-    <string name="gestao_lista">lista</string>
-    <string name="gestao_title">gestao de usuarios</string>
-    <string name="gestao_editar">editar</string>
-    <string name="gestao_excluir">excluir</string>
+    <string name="management_list">lista</string>
+    <string name="management_title">gestao de usuarios</string>
+    <string name="management_edit">editar</string>
+    <string name="management_delete">excluir</string>
 
-    <string name="lista_title">lista de repositorios</string>
+    <string name="list_repository_title">lista de repositorios</string>
 
-    <string name="item_editar">Editar</string>
-    <string name="item_excluir">Excluir</string>
+    <string name="item_edit">Editar</string>
+    <string name="item_delete">Excluir</string>
 
     <string name="dialog_delete_title">Excluir usuário?</string>
     <string name="dialog_delete_button">Excluir</string>
@@ -33,6 +33,6 @@
 
     <string name="hint_name">Nome</string>
     <string name="hint_email">email</string>
-    <string name="hint_senha">Senha</string>
+    <string name="hint_password">Senha</string>
 
 </resources>

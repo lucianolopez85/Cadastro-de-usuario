@@ -17,9 +17,9 @@
 
     <fragment
         android:id="@+id/cadastroFragment"
-        android:name="com.example.cadastro_de_usuario.ui.view.CadastroFragment"
+        android:name="com.example.cadastro_de_usuario.ui.view.RegisterFragment"
         android:label="fragment_cadastro"
-        tools:layout="@layout/fragment_cadastro" >
+        tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_cadastroFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -32,9 +32,9 @@
     </fragment>
     <fragment
         android:id="@+id/gestaoFragment"
-        android:name="com.example.cadastro_de_usuario.ui.view.GestaoFragment"
+        android:name="com.example.cadastro_de_usuario.ui.view.UserManagementFragment"
         android:label="fragment_gestao"
-        tools:layout="@layout/fragment_gestao" >
+        tools:layout="@layout/fragment_user_management" >
         <action
             android:id="@+id/action_gestaoFragment_to_cadastroFragment"
             app:destination="@id/cadastroFragment" />
@@ -45,9 +45,9 @@
     </fragment>
     <fragment
         android:id="@+id/listaFragment"
-        android:name="com.example.cadastro_de_usuario.ui.view.ListaFragment"
+        android:name="com.example.cadastro_de_usuario.ui.view.ListRepositoryFragment"
         android:label="fragment_lista"
-        tools:layout="@layout/fragment_lista" >
+        tools:layout="@layout/fragment_list_repository" >
         <action
             android:id="@+id/action_listaFragment_to_gestaoFragment"
             app:destination="@id/gestaoFragment" />

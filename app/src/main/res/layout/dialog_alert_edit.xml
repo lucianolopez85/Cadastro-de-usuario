@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_dialog_title"
-        app:helperText="@string/cadastro_required"
+        app:helperText="@string/register_required"
         app:helperTextTextColor="@android:color/holo_red_light">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_layout_name"
-        app:helperText="@string/cadastro_required"
+        app:helperText="@string/register_required"
         app:helperTextTextColor="@android:color/holo_red_light">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -71,7 +71,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_layout_email"
-        app:helperText="@string/cadastro_required"
+        app:helperText="@string/register_required"
         app:helperTextTextColor="@android:color/holo_red_light">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -81,7 +81,7 @@
             android:inputType="textPassword"
             android:maxLength="16"
             android:lines="1"
-            android:hint="@string/hint_senha"/>
+            android:hint="@string/hint_password"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

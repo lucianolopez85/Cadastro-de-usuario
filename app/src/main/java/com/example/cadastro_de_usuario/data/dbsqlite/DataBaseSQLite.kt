@@ -1,10 +1,11 @@
-package com.example.cadastro_de_usuario.data
+package com.example.cadastro_de_usuario.data.dbsqlite
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.cadastro_de_usuario.domain.vo.UserDataVO
 
 class DataBaseSQLite(context: Context): SQLiteOpenHelper(context, db_NAME, null, db_VERSION) {
 

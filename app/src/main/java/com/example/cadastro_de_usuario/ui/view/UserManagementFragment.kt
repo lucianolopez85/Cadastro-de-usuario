@@ -7,16 +7,16 @@ import android.view.View.VISIBLE
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cadastro_de_usuario.R
-import com.example.cadastro_de_usuario.data.DataBaseSQLite
-import com.example.cadastro_de_usuario.data.UserDataVO
-import com.example.cadastro_de_usuario.databinding.FragmentGestaoBinding
+import com.example.cadastro_de_usuario.data.dbsqlite.DataBaseSQLite
+import com.example.cadastro_de_usuario.domain.vo.UserDataVO
+import com.example.cadastro_de_usuario.databinding.FragmentUserManagementBinding
 import com.example.cadastro_de_usuario.ui.adapter.ListAdapter
-import com.example.cadastro_de_usuario.ui.viewmodel.GestaoViewModel
+import com.example.cadastro_de_usuario.ui.viewmodel.UserManagementViewModel
 
-class GestaoFragment : Fragment(R.layout.fragment_gestao) {
+class UserManagementFragment : Fragment(R.layout.fragment_user_management) {
 
-    private val binding: FragmentGestaoBinding by lazy { FragmentGestaoBinding.bind(requireView()) }
-    private val viewModel: GestaoViewModel by lazy { GestaoViewModel(DataBaseSQLite(requireContext()))}
+    private val binding: FragmentUserManagementBinding by lazy { FragmentUserManagementBinding.bind(requireView()) }
+    private val viewModel: UserManagementViewModel by lazy { UserManagementViewModel(DataBaseSQLite(requireContext()))}
 
     override fun onViewCreated(view: View, savedInstancesState: Bundle?) {
 

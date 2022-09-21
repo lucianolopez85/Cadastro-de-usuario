@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ui.view.ListaFragment">
+    tools:context="ui.view.ListRepositoryFragment">
 
     <ImageView
         android:id="@+id/icon_back"
@@ -21,7 +21,7 @@
         style="@style/TextAppearance.Material3.BodyLarge"
         android:textStyle="bold"
         android:layout_height="wrap_content"
-        android:text="@string/lista_title"
+        android:text="@string/list_repository_title"
         android:textAllCaps="true"
         android:gravity="center"
         android:layout_margin="@dimen/spacing_24"
