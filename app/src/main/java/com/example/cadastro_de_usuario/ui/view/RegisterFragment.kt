@@ -10,7 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.cadastro_de_usuario.R
 import com.example.cadastro_de_usuario.data.DataBaseSQLite
-import com.example.cadastro_de_usuario.data.User
+import com.example.cadastro_de_usuario.data.UserDataVO
 import com.example.cadastro_de_usuario.databinding.FragmentCadastroBinding
 import kotlinx.android.synthetic.main.fragment_cadastro.*
 
@@ -86,9 +86,9 @@ class CadastroFragment : Fragment() {
     }
 
     private fun saveValuesDataBase(checkedRadioGroup: Int) {
-        val cont = dataBaseSQLite.getListUser().size
+        val cont = dataBaseSQLite.getUserList().size
         dataBaseSQLite.addUser(
-            user = User(
+            userDataVO = UserDataVO(
                 id = cont + 1,
                 name = edit_cadastro_name.text.toString(),
                 email = edit_cadastro_email.text.toString(),

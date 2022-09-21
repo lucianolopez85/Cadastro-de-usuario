@@ -1,6 +1,6 @@
 package com.example.cadastro_de_usuario.data
 
-data class User(
+data class UserDataVO(
     var id: Int = 0,
     var name: String = "",
     var email: String = "",

@@ -31,29 +31,19 @@ class DataBaseSQLite(context: Context): SQLiteOpenHelper(context, db_NAME, null,
         onCreate(db)
     }
 
-    fun addUser(user: User) {
+    fun addUser(userDataVO: UserDataVO) {
         val db = writableDatabase
         val values = ContentValues().apply {
-            put(NAME, user.name)
-            put(EMAIL, user.email)
-            put(PASSWORD, user.password)
-            put(USER_TYPE, user.type.toString())
+            put(NAME, userDataVO.name)
+            put(EMAIL, userDataVO.email)
+            put(PASSWORD, userDataVO.password)
+            put(USER_TYPE, userDataVO.type.toString())
         }
         db.insert(TABLE_NAME, null, values)
     }
 
-    fun getUser(id: Int): User {
-        val db = readableDatabase
-        val selectQuery = "SELECT * FROM $TABLE_NAME WHERE $ID = $id;"
-        val cursor = db.rawQuery(selectQuery, null)
-        cursor?.moveToFirst()
-        val user = populateUser(cursor)
-        cursor.close()
-        return user
-    }
-
-    fun getListUser() : ArrayList<User> {
-        val userList = ArrayList<User>()
+    fun getUserList() : ArrayList<UserDataVO> {
+        val userDataVOList = ArrayList<UserDataVO>()
         val db = readableDatabase
         val selectQuery = "SELECT * FROM $TABLE_NAME ORDER BY $NAME;"
         val cursor = db.rawQuery(selectQuery, null)
@@ -61,22 +51,22 @@ class DataBaseSQLite(context: Context): SQLiteOpenHelper(context, db_NAME, null,
             if (cursor.moveToFirst()) {
                 do {
                     val user = populateUser(cursor)
-                    userList.add(user)
+                    userDataVOList.add(user)
                 }while (cursor.moveToNext())
             }
         }
         cursor.close()
-        return  userList
+        return  userDataVOList
     }
 
-    fun updateUser(user: User) {
+    fun updateUser(userDataVO: UserDataVO) {
         val db = writableDatabase
         val values = ContentValues().apply {
-            put(NAME, user.name)
-            put(EMAIL, user.email)
-            put(PASSWORD, user.password)
+            put(NAME, userDataVO.name)
+            put(EMAIL, userDataVO.email)
+            put(PASSWORD, userDataVO.password)
         }
-        db.update(TABLE_NAME, values, "$ID=?", arrayOf(user.id.toString()))
+        db.update(TABLE_NAME, values, "$ID=?", arrayOf(userDataVO.id.toString()))
     }
 
     fun delUser(id: Int) {
@@ -84,9 +74,9 @@ class DataBaseSQLite(context: Context): SQLiteOpenHelper(context, db_NAME, null,
         db.delete(TABLE_NAME, "$ID=?", arrayOf(id.toString()))
     }
 
-    fun populateUser(cursor: Cursor): User {
-        val user = User()
-        with(user){
+    fun populateUser(cursor: Cursor): UserDataVO {
+        val userDataVO = UserDataVO()
+        with(userDataVO){
             id = cursor.getInt(cursor.getColumnIndexOrThrow(ID))
             name = cursor.getString(cursor.getColumnIndexOrThrow(NAME))
             email = cursor.getString(cursor.getColumnIndexOrThrow(EMAIL))
@@ -94,7 +84,7 @@ class DataBaseSQLite(context: Context): SQLiteOpenHelper(context, db_NAME, null,
             type = cursor.getInt(cursor.getColumnIndexOrThrow(USER_TYPE))
         }
 
-        return user
+        return userDataVO
     }
 }
 
