@@ -26,10 +26,10 @@ class UserManagementFragment : Fragment(R.layout.fragment_user_management) {
 
     private fun setupToolbar() {
         binding.iconBack.setOnClickListener {
-            findNavController().navigate(R.id.action_gestaoFragment_to_cadastroFragment)
+            findNavController().navigate(R.id.action_userManagementFragment_to_registerFragment)
         }
         binding.buttonLista.setOnClickListener {
-            findNavController().navigate(R.id.action_gestaoFragment_to_listaFragment)
+            findNavController().navigate(R.id.action_userManagementFragment_to_listFragment)
         }
     }
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cadastro_de_usuario_navigation"
-    app:startDestination="@id/gestaoFragment">
+    app:startDestination="@id/listFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -11,46 +11,46 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_cadastroFragment"
-            app:destination="@id/cadastroFragment" />
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/userManagementFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/cadastroFragment"
+        android:id="@+id/userManagementFragment"
         android:name="com.example.cadastro_de_usuario.ui.view.RegisterFragment"
-        android:label="fragment_cadastro"
+        android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
-            android:id="@+id/action_cadastroFragment_to_loginFragment"
+            android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_cadastroFragment_to_gestaoFragment"
-            app:destination="@id/gestaoFragment" />
+            android:id="@+id/action_registerFragment_to_userManagementFragment"
+            app:destination="@id/UserManagementFragment" />
         <action
-            android:id="@+id/action_cadastroFragment_to_listaFragment"
-            app:destination="@id/listaFragment" />
+            android:id="@+id/action_registerFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
     <fragment
-        android:id="@+id/gestaoFragment"
+        android:id="@+id/UserManagementFragment"
         android:name="com.example.cadastro_de_usuario.ui.view.UserManagementFragment"
-        android:label="fragment_gestao"
+        android:label="fragment_user_management"
         tools:layout="@layout/fragment_user_management" >
         <action
-            android:id="@+id/action_gestaoFragment_to_cadastroFragment"
-            app:destination="@id/cadastroFragment" />
+            android:id="@+id/action_userManagementFragment_to_registerFragment"
+            app:destination="@id/userManagementFragment" />
         <action
-            android:id="@+id/action_gestaoFragment_to_listaFragment"
-            app:destination="@id/listaFragment" />
+            android:id="@+id/action_userManagementFragment_to_listFragment"
+            app:destination="@id/listFragment" />
 
     </fragment>
     <fragment
-        android:id="@+id/listaFragment"
+        android:id="@+id/listFragment"
         android:name="com.example.cadastro_de_usuario.ui.view.ListRepositoryFragment"
-        android:label="fragment_lista"
+        android:label="fragment_list"
         tools:layout="@layout/fragment_list_repository" >
         <action
-            android:id="@+id/action_listaFragment_to_gestaoFragment"
-            app:destination="@id/gestaoFragment" />
+            android:id="@+id/action_listFragment_to_gestaoFragment"
+            app:destination="@id/UserManagementFragment" />
     </fragment>
 
 </navigation>

@@ -35,4 +35,6 @@
     <string name="hint_email">email</string>
     <string name="hint_password">Senha</string>
 
+    <string name="item_repository_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie, urna varius rhoncus auctor, lectus justo vehicula leo, ut dictum sem nisi ac leo. Quisque neque diam, volutpat non urna non, commodo varius mi. Nunc dictum maximus turpis, ut sagittis velit.</string>
+
 </resources>

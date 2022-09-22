@@ -37,7 +37,7 @@ class RegisterFragment : Fragment() {
 
     private fun setupToolbar() {
         binding.iconBack.setOnClickListener {
-            findNavController().navigate(R.id.action_cadastroFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
 
@@ -63,9 +63,9 @@ class RegisterFragment : Fragment() {
         val checkedRadioGroup = binding.radioGroupCadastro.checkedRadioButtonId
         saveValuesDataBase(checkedRadioGroup)
         if (checkedRadioGroup == R.id.radio_cadastro_admin) {
-            findNavController().navigate(R.id.action_cadastroFragment_to_gestaoFragment)
+            findNavController().navigate(R.id.action_registerFragment_to_userManagementFragment)
         } else {
-            findNavController().navigate(R.id.action_cadastroFragment_to_listaFragment)
+            findNavController().navigate(R.id.action_registerFragment_to_listFragment)
         }
     }
 

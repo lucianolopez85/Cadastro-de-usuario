@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.cadastro_de_usuario.R
@@ -21,7 +20,7 @@ class LoginFragment : Fragment() {
         val buttonCadastro = view.findViewById<TextView>(R.id.efetuar_cadastro)
 
         buttonCadastro.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_cadastroFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
         return view

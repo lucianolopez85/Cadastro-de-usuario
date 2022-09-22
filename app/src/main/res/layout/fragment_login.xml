@@ -17,7 +17,7 @@
         android:maxLines="1"
         android:padding="@dimen/spacing_16"
         android:textAllCaps="false"
-        android:layout_marginTop="@dimen/spacing_100"
+        android:layout_marginTop="@dimen/spacing_80"
         android:layout_marginHorizontal="@dimen/spacing_24"
         app:layout_constraintTop_toTopOf="parent"
         />
