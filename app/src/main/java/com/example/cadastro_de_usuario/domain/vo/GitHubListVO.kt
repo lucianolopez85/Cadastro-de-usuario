@@ -1,8 +1,8 @@
 package com.example.cadastro_de_usuario.domain.vo
 
-data class GitHubRepositoryVO(
+data class GitHubListVO(
     val id: String,
-    val avatar: Int,
+    val avatar: String,
     val name: String,
     val description: String? = null,
     val star: String? = null,

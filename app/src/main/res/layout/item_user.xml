@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="MARIA" />
+        tools:text="@tools:sample/full_names" />
 
     <TextView
         android:id="@+id/text_item_editar"

@@ -46,6 +46,7 @@ class ListAdapter(
     class AdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textName = itemView.findViewById<TextView>(R.id.text_item_name)
         val textEdit = itemView.findViewById<TextView>(R.id.text_item_editar)
+
         val textDelete = itemView.findViewById<TextView>(R.id.text_item_excluir)
     }
 

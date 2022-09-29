@@ -1,25 +1,37 @@
 package com.example.cadastro_de_usuario
 
-import com.example.cadastro_de_usuario.domain.vo.GitHubRepositoryVO
-import retrofit2.Call
+import com.example.cadastro_de_usuario.data.GitHubApi
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
+import java.util.concurrent.TimeUnit
 
-interface NetworkUtils {
+object RetrofitServices {
 
-    @GET("search/repositories?q=language:Java&sort=stars&/page=1")
-    fun getAllRecipes(): Call<List<GitHubRepositoryVO>>
+    private const val BASE_URL = "https://api.github.com/"
 
-    companion object {
+    private val client: OkHttpClient =
+        OkHttpClient.Builder()
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10,TimeUnit.SECONDS)
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+            .build()
 
-        fun getRetrofitInstance(path: String): Retrofit {
-            return Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        }
+    private val gson: Gson = GsonBuilder().create()
 
+    val gitHubApi : GitHubApi by lazy {
+
+        val retrofitService = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+
+        retrofitService.create(GitHubApi::class.java)
     }
-}'
-//'https://api.github.com/search/repositories?q=language:Java&sort=stars& page=1
+}

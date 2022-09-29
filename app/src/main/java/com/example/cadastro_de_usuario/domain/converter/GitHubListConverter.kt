@@ -1,13 +1,13 @@
 package com.example.cadastro_de_usuario.domain.converter
 
-import com.example.cadastro_de_usuario.data.dto.GitHubListDTO
-import com.example.cadastro_de_usuario.domain.vo.GitHubRepositoryVO
+import com.example.cadastro_de_usuario.data.dto.GitHubRepositoryDTO
+import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
 
-class ListRepositoryConverter {
+class GitHubListConverter {
 
-    fun converter(data: List<GitHubListDTO>): List<GitHubRepositoryVO> =
+    fun converter(data: List<GitHubRepositoryDTO>): List<GitHubListVO> =
         data.map { dto ->
-            GitHubRepositoryVO(
+            GitHubListVO(
             id = dto.id.toString(),
             avatar = dto.user.avatar,
             name = dto.name,

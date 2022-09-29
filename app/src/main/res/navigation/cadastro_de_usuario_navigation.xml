@@ -12,11 +12,11 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/userManagementFragment" />
+            app:destination="@id/registerFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/userManagementFragment"
+        android:id="@+id/registerFragment"
         android:name="com.example.cadastro_de_usuario.ui.view.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
@@ -37,7 +37,7 @@
         tools:layout="@layout/fragment_user_management" >
         <action
             android:id="@+id/action_userManagementFragment_to_registerFragment"
-            app:destination="@id/userManagementFragment" />
+            app:destination="@id/registerFragment" />
         <action
             android:id="@+id/action_userManagementFragment_to_listFragment"
             app:destination="@id/listFragment" />
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.cadastro_de_usuario.ui.view.ListRepositoryFragment"
+        android:name="com.example.cadastro_de_usuario.ui.view.GitHubListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list_repository" >
         <action

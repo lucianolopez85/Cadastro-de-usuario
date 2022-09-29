@@ -2,7 +2,7 @@ package com.example.cadastro_de_usuario.data.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class GitHubListDTO (
+data class GitHubRepositoryDTO (
     @SerializedName("id") val id: Int,
     @SerializedName("owner") val user: User,
     @SerializedName("name") val name: String,
@@ -12,5 +12,5 @@ data class GitHubListDTO (
 )
 
 data class User(
-    @SerializedName("avatar_url") val avatar: Int
+    @SerializedName("avatar_url") val avatar: String
 )

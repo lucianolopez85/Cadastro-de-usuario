@@ -3,27 +3,27 @@ package com.example.cadastro_de_usuario.ui.view
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cadastro_de_usuario.R
 import com.example.cadastro_de_usuario.RetrofitServices
 import com.example.cadastro_de_usuario.data.repository.GitHubRepository
 import com.example.cadastro_de_usuario.databinding.FragmentListRepositoryBinding
-import com.example.cadastro_de_usuario.domain.converter.ListRepositoryConverter
-import com.example.cadastro_de_usuario.domain.vo.GitHubRepositoryVO
-import com.example.cadastro_de_usuario.ui.adapter.GitHubRepositoryAdapter
-import com.example.cadastro_de_usuario.ui.viewmodel.ListRepositoryViewModel
+import com.example.cadastro_de_usuario.domain.converter.GitHubListConverter
+import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
+import com.example.cadastro_de_usuario.ui.adapter.GitHubListAdapter
+import com.example.cadastro_de_usuario.ui.viewmodel.GitHubListViewModel
+import kotlinx.coroutines.launch
 
-class ListRepositoryFragment : Fragment(R.layout.fragment_list_repository) {
+class GitHubListFragment : Fragment(R.layout.fragment_list_repository) {
 
     private val binding: FragmentListRepositoryBinding by lazy { FragmentListRepositoryBinding.bind(requireView()) }
-    private val viewModel: ListRepositoryViewModel by lazy { ListRepositoryViewModel(GitHubRepository(), ListRepositoryConverter()) }
-    lateinit var apiServices: RetrofitServices
+    private val viewModel: GitHubListViewModel by lazy { GitHubListViewModel(GitHubRepository(), GitHubListConverter()) }
 
     override fun onViewCreated(view: View, savedInstancesState: Bundle?) {
         setupToolbar()
         setupObserver()
-        getApiService()
     }
 
     private fun setupToolbar() {
@@ -37,19 +37,14 @@ class ListRepositoryFragment : Fragment(R.layout.fragment_list_repository) {
         viewModel.fetchInformation()
     }
 
-    private fun onSuccess(list: List<GitHubRepositoryVO>) = with(binding.recyclerView) {
+    private fun onSuccess(list: List<GitHubListVO>) = with(binding.recyclerView) {
         initRecyclerView(list)
         visibility = View.VISIBLE
     }
 
-    private fun initRecyclerView(list: List<GitHubRepositoryVO>) = with(binding.recyclerView) {
+    private fun initRecyclerView(list: List<GitHubListVO>) = with(binding.recyclerView) {
         layoutManager = LinearLayoutManager(requireContext())
         setHasFixedSize(true)
-        adapter = GitHubRepositoryAdapter(list)
-    }
-
-    private fun getApiService() {
-        apiServices = RetrofitServices()
-        apiServices.services()
+        adapter = GitHubListAdapter(list)
     }
 }

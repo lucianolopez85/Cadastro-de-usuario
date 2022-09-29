@@ -82,6 +82,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_layout_email"
         app:helperText="@string/register_required"
+        app:passwordToggleEnabled="true"
+        app:counterEnabled="true"
         app:helperTextTextColor="@android:color/holo_red_light">
 
         <com.google.android.material.textfield.TextInputEditText

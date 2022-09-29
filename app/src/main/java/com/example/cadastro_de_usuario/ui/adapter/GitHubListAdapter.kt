@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cadastro_de_usuario.R
-import com.example.cadastro_de_usuario.domain.vo.GitHubRepositoryVO
+import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
 
 import kotlinx.android.synthetic.main.item_repository.view.*
 
-class GitHubRepositoryAdapter(
-    private val repositoryList: List<GitHubRepositoryVO> = ArrayList()
-) : RecyclerView.Adapter<GitHubRepositoryAdapter.AdapterViewHolder>() {
+class GitHubListAdapter(
+    private val repositoryList: List<GitHubListVO> = ArrayList()
+) : RecyclerView.Adapter<GitHubListAdapter.AdapterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_repository, parent, false)
@@ -19,7 +19,7 @@ class GitHubRepositoryAdapter(
     }
 
     override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
-        holder.imageAvatar.setImageResource(repositoryList[position].avatar)
+//        holder.imageAvatar.setImageResource(repositoryList[position].avatar)
         holder.textName.text = repositoryList[position].name
         holder.textdescription.text = repositoryList[position].description
         holder.numberStart.text = repositoryList[position].star
