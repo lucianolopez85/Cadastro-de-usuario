@@ -3,18 +3,15 @@ package com.example.cadastro_de_usuario.ui.view
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cadastro_de_usuario.R
-import com.example.cadastro_de_usuario.RetrofitServices
 import com.example.cadastro_de_usuario.data.repository.GitHubRepository
 import com.example.cadastro_de_usuario.databinding.FragmentListRepositoryBinding
 import com.example.cadastro_de_usuario.domain.converter.GitHubListConverter
 import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
 import com.example.cadastro_de_usuario.ui.adapter.GitHubListAdapter
 import com.example.cadastro_de_usuario.ui.viewmodel.GitHubListViewModel
-import kotlinx.coroutines.launch
 
 class GitHubListFragment : Fragment(R.layout.fragment_list_repository) {
 
