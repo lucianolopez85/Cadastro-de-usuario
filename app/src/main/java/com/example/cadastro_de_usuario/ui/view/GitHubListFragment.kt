@@ -3,6 +3,7 @@ package com.example.cadastro_de_usuario.ui.view
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.core.widget.NestedScrollView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cadastro_de_usuario.R
@@ -17,11 +18,14 @@ class GitHubListFragment : Fragment(R.layout.fragment_list_repository) {
 
     private val binding: FragmentListRepositoryBinding by lazy { FragmentListRepositoryBinding.bind(requireView()) }
     private val viewModel: GitHubListViewModel by lazy { GitHubListViewModel(GitHubRepository(), GitHubListConverter()) }
+    lateinit var nestedScrollView: NestedScrollView
+    private var pageCount = 1
 
     override fun onViewCreated(view: View, savedInstancesState: Bundle?) {
         setupToolbar()
         setupObserver()
     }
+
 
     private fun setupToolbar() {
         binding.iconBack.setOnClickListener {
@@ -31,7 +35,7 @@ class GitHubListFragment : Fragment(R.layout.fragment_list_repository) {
 
     private fun setupObserver() {
         viewModel.listRepository.observe(viewLifecycleOwner, ::onSuccess)
-        viewModel.fetchInformation()
+        viewModel.fetchInformation(setupPagination())
     }
 
     private fun onSuccess(list: List<GitHubListVO>) = with(binding.recyclerView) {
@@ -43,5 +47,19 @@ class GitHubListFragment : Fragment(R.layout.fragment_list_repository) {
         layoutManager = LinearLayoutManager(requireContext())
         setHasFixedSize(true)
         adapter = GitHubListAdapter(list)
+    }
+
+    private fun setupPagination(): Int {
+        nestedScrollView = binding.nestedScrollView
+        val isPagination = true
+        if (isPagination) {
+            nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener {
+                    v, scrollX, scrollY, oldScrollX, oldScrollY ->
+                if (scrollY==v.getChildAt(0).measuredHeight -v.measuredHeight) {
+                    ++ pageCount
+                }
+            })
+        }
+        return  pageCount
     }
 }

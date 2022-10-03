@@ -9,5 +9,6 @@ class GitHubRepository {
 
     private val api: GitHubApi = RetrofitServices.gitHubApi
 
-    suspend fun getListRepository() = withContext(Dispatchers.IO) { api.getRepositories(1) }
+    suspend fun getListRepository(page: Int) =
+        withContext(Dispatchers.IO) { api.getRepositories(page) }
 }
