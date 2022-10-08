@@ -1,4 +1,4 @@
-package com.example.cadastro_de_usuario.data
+package com.example.cadastro_de_usuario.data.retrofit
 
 import com.example.cadastro_de_usuario.data.dto.GitHubRepositoryListResponseDTO
 import retrofit2.http.GET

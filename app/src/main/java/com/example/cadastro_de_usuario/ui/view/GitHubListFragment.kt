@@ -3,27 +3,30 @@ package com.example.cadastro_de_usuario.ui.view
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.core.widget.NestedScrollView
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cadastro_de_usuario.R
-import com.example.cadastro_de_usuario.data.repository.GitHubRepository
 import com.example.cadastro_de_usuario.databinding.FragmentListRepositoryBinding
-import com.example.cadastro_de_usuario.domain.converter.GitHubListConverter
-import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
-import com.example.cadastro_de_usuario.ui.adapter.GitHubListAdapter
+import com.example.cadastro_de_usuario.ui.adapter.PagingAdapter
 import com.example.cadastro_de_usuario.ui.viewmodel.GitHubListViewModel
+import com.example.cadastro_de_usuario.data.dto.GitHubRepositoryDTO
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
+
+@AndroidEntryPoint
 class GitHubListFragment : Fragment(R.layout.fragment_list_repository) {
 
     private val binding: FragmentListRepositoryBinding by lazy { FragmentListRepositoryBinding.bind(requireView()) }
-    private val viewModel: GitHubListViewModel by lazy { GitHubListViewModel(GitHubRepository(), GitHubListConverter()) }
-    lateinit var nestedScrollView: NestedScrollView
-    private var pageCount = 1
+    lateinit var viewModel: GitHubListViewModel
+    lateinit var pagingAdapter: PagingAdapter
 
     override fun onViewCreated(view: View, savedInstancesState: Bundle?) {
         setupToolbar()
-        setupObserver()
+        initRecyclerView()
+        initViewModel()
     }
 
 
@@ -33,33 +36,20 @@ class GitHubListFragment : Fragment(R.layout.fragment_list_repository) {
         }
     }
 
-    private fun setupObserver() {
-        viewModel.listRepository.observe(viewLifecycleOwner, ::onSuccess)
-        viewModel.fetchInformation(setupPagination())
-    }
-
-    private fun onSuccess(list: List<GitHubListVO>) = with(binding.recyclerView) {
-        initRecyclerView(list)
-        visibility = View.VISIBLE
-    }
-
-    private fun initRecyclerView(list: List<GitHubListVO>) = with(binding.recyclerView) {
+    private fun initRecyclerView() = with(binding.recyclerView) {
         layoutManager = LinearLayoutManager(requireContext())
         setHasFixedSize(true)
-        adapter = GitHubListAdapter(list)
+        pagingAdapter = PagingAdapter()
+        adapter = pagingAdapter
     }
 
-    private fun setupPagination(): Int {
-        nestedScrollView = binding.nestedScrollView
-        val isPagination = true
-        if (isPagination) {
-            nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener {
-                    v, scrollX, scrollY, oldScrollX, oldScrollY ->
-                if (scrollY==v.getChildAt(0).measuredHeight -v.measuredHeight) {
-                    ++ pageCount
-                }
-            })
+    private fun initViewModel() {
+        val viewModel  = ViewModelProvider(this).get(GitHubListViewModel::class.java)
+        lifecycleScope.launchWhenCreated {
+            viewModel.fetchInformation().collectLatest {
+                pagingAdapter.submitData(it)
+            }
         }
-        return  pageCount
     }
+
 }
