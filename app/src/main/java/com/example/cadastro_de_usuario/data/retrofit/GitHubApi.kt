@@ -4,11 +4,16 @@ import com.example.cadastro_de_usuario.data.dto.GitHubRepositoryListResponseDTO
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface GitHubApi {
+private const val ORDER = "desc"
+private const val SORT = "stars"
 
-    @GET("search/repositories?q=language:Java&sort=stars&/")
-    suspend fun getRepositories(
-        @Query("page") page : Int
-    ) : GitHubRepositoryListResponseDTO
+internal interface GitHubApi {
 
+    @GET("search/repositories")
+    suspend fun getSearchRepositories(
+        @Query("sort") sort: String = SORT,
+        @Query("order") order: String = ORDER,
+        @Query("page") page: Int,
+        @Query("q") language: String
+    ): GitHubRepositoryListResponseDTO
 }

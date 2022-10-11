@@ -1,34 +1,37 @@
 package com.example.cadastro_de_usuario.ui.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
+import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.paging.CombinedLoadStates
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cadastro_de_usuario.R
+import com.example.cadastro_de_usuario.commons.*
+import com.example.cadastro_de_usuario.commons.ErrorAction
+import com.example.cadastro_de_usuario.commons.LoadAction
+import com.example.cadastro_de_usuario.commons.SuccessAction
+import com.example.cadastro_de_usuario.commons.isLoading
 import com.example.cadastro_de_usuario.databinding.FragmentListRepositoryBinding
-import com.example.cadastro_de_usuario.ui.adapter.PagingAdapter
+import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
+import com.example.cadastro_de_usuario.ui.adapter.ListRepositoriesAdapter
 import com.example.cadastro_de_usuario.ui.viewmodel.GitHubListViewModel
-import com.example.cadastro_de_usuario.data.dto.GitHubRepositoryDTO
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
+internal class GitHubListFragment : Fragment(R.layout.fragment_list_repository) {
 
-@AndroidEntryPoint
-class GitHubListFragment : Fragment(R.layout.fragment_list_repository) {
+    private val binding by lazy { FragmentListRepositoryBinding.bind(requireView()) }
+    private val viewModel: GitHubListViewModel by viewModel()
+    private val repositoriesAdapter by lazy { ListRepositoriesAdapter() }
 
-    private val binding: FragmentListRepositoryBinding by lazy { FragmentListRepositoryBinding.bind(requireView()) }
-    lateinit var viewModel: GitHubListViewModel
-    lateinit var pagingAdapter: PagingAdapter
-
-    override fun onViewCreated(view: View, savedInstancesState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupToolbar()
-        initRecyclerView()
-        initViewModel()
+        setupObserver()
     }
-
 
     private fun setupToolbar() {
         binding.iconBack.setOnClickListener {
@@ -36,20 +39,48 @@ class GitHubListFragment : Fragment(R.layout.fragment_list_repository) {
         }
     }
 
-    private fun initRecyclerView() = with(binding.recyclerView) {
-        layoutManager = LinearLayoutManager(requireContext())
-        setHasFixedSize(true)
-        pagingAdapter = PagingAdapter()
-        adapter = pagingAdapter
+    private fun setupObserver() {
+        viewModel.repositories.observe(viewLifecycleOwner ) {
+            when (it) {
+                is ErrorAction -> onError()
+                is LoadAction -> onLoading()
+                is SuccessAction -> onSuccess(it.data)
+            }
+        }
+        viewModel.fetchRepositories()
     }
 
-    private fun initViewModel() {
-        val viewModel  = ViewModelProvider(this).get(GitHubListViewModel::class.java)
-        lifecycleScope.launchWhenCreated {
-            viewModel.fetchInformation().collectLatest {
-                pagingAdapter.submitData(it)
-            }
+    private fun getLoadStateListener(): (CombinedLoadStates) -> Unit = {
+        when {
+            it.isLoading() -> onLoading()
+            it.isError() -> onError()
+            else -> hideLoading()
         }
     }
 
+    private fun onSuccess(data: PagingData<GitHubListVO>) = with(repositoriesAdapter) {
+        hideLoading()
+        initRecyclerView()
+        addLoadStateListener(getLoadStateListener())
+        submitData(viewLifecycleOwner.lifecycle, data)
+    }
+
+    private fun initRecyclerView() = with(binding.recyclerView) {
+        layoutManager = LinearLayoutManager(requireContext())
+        setHasFixedSize(true)
+        adapter = repositoriesAdapter
+    }
+
+    private fun hideLoading() {
+        binding.reposRefreshLayout.isRefreshing = false
+    }
+
+    private fun onLoading() {
+        binding.reposRefreshLayout.isRefreshing = true
+        binding.reposRefreshLayout.isVisible = true
+    }
+
+    private fun onError() {
+        Toast.makeText(requireContext(),"ERROR", Toast.LENGTH_LONG).show()
+    }
 }

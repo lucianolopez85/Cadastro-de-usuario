@@ -1,21 +1,29 @@
 package com.example.cadastro_de_usuario.ui.viewmodel
 
-import androidx.lifecycle.*
-import androidx.paging.*
-import com.example.cadastro_de_usuario.data.dto.GitHubRepositoryDTO
-import com.example.cadastro_de_usuario.data.retrofit.GitHubApi
-import com.example.cadastro_de_usuario.paging.GitHubPagingSource
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.example.cadastro_de_usuario.commons.UiAction
+import com.example.cadastro_de_usuario.commons.asLiveData
+import com.example.cadastro_de_usuario.domain.usecase.GetKotlinReposUseCase
+import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
+import kotlinx.coroutines.flow.distinctUntilChanged
 
-@HiltViewModel
-class GitHubListViewModel @Inject constructor(private val gitHubApi: GitHubApi) : ViewModel() {
+internal class GitHubListViewModel (private val useCase: GetKotlinReposUseCase) : ViewModel() {
 
-    fun fetchInformation(): Flow<PagingData<GitHubRepositoryDTO>> {
-        return Pager(
-            config = PagingConfig(pageSize = 350),
-            pagingSourceFactory = { GitHubPagingSource(gitHubApi) }
-        ).flow.cachedIn(viewModelScope)
+    private val _repositories = MutableLiveData<Unit>()
+    val repositories: LiveData<UiAction<PagingData<GitHubListVO>>> = _repositories.switchMap {
+        useCase()
+            .distinctUntilChanged()
+            .cachedIn(viewModelScope)
+            .asLiveData()
+    }
+
+    fun fetchRepositories() {
+        _repositories.value = Unit
     }
 }

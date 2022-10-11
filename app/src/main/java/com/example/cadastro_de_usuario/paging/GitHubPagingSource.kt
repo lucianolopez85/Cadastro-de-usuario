@@ -2,39 +2,45 @@ package com.example.cadastro_de_usuario.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.cadastro_de_usuario.data.retrofit.GitHubApi
 import com.example.cadastro_de_usuario.data.dto.GitHubRepositoryDTO
-import com.example.cadastro_de_usuario.data.dto.GitHubRepositoryListResponseDTO
+import com.example.cadastro_de_usuario.data.retrofit.GitHubApi
+import retrofit2.HttpException
+import java.io.IOException
 
-class GitHubPagingSource(
-    private val gitHubApi: GitHubApi
-): PagingSource<Int, GitHubRepositoryDTO>() {
+private const val START_PAGE_INDEX = 1
 
-    companion object {
-        private const val TOTAL_PAGE = 350
-        private const val FIRST_PAGE = 1
-    }
+internal class GitHubPagingSource(
+    private val service: GitHubApi,
+    private val language: String
+) : PagingSource<Int, GitHubRepositoryDTO>() {
+
+    override fun getRefreshKey(state: PagingState<Int, GitHubRepositoryDTO>): Int? = null
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GitHubRepositoryDTO> {
+        val position = params.getCurrentPosition()
+
         return try {
-            val position = params.key ?: FIRST_PAGE
-            val response = gitHubApi.getRepositories(position)
+            val response = service.getSearchRepositories(page = position, language = language)
+            val repos = response.items.orEmpty()
+            val nextKey = takeIf { position < response.totalCount }?.let {
+                position.inc()
+            }
 
-            return LoadResult.Page(
-                data = response.items,
-                prevKey = if (position == FIRST_PAGE) null else position -1,
-                nextKey = if (position == TOTAL_PAGE) null else position +1,
+            LoadResult.Page(
+                data = repos,
+                prevKey = params.getPrevKey(),
+                nextKey = nextKey
             )
-        }
-        catch (e:Exception){
-            LoadResult.Error(e)
+        } catch (exception: IOException) {
+            LoadResult.Error(exception)
+        } catch (exception: HttpException) {
+            LoadResult.Error(exception)
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, GitHubRepositoryDTO>): Int? {
-        return state.anchorPosition?.let {
-            val anchorPage = state.closestPageToPosition(it)
-            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
-        }
-    }
+    private fun LoadParams<Int>.getPrevKey() =
+        key?.takeIf { it > START_PAGE_INDEX }?.dec()
+
+    private fun LoadParams<Int>.getCurrentPosition() =
+        key ?: START_PAGE_INDEX
 }
