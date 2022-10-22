@@ -51,6 +51,18 @@
         <action
             android:id="@+id/action_listFragment_to_gestaoFragment"
             app:destination="@id/UserManagementFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_pullRequestListFragment"
+            app:destination="@id/pullRequestListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pullRequestListFragment"
+        android:name="com.example.cadastro_de_usuario.ui.view.PullRequestListFragment"
+        android:label="PullRequestListFragment"
+        tools:layout="@layout/fragment_pull_request_list" >
+    <action
+            android:id="@+id/action_pullRequestListFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
 
 </navigation>

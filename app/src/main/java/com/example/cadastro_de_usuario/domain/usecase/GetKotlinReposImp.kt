@@ -8,7 +8,7 @@ import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-private const val LANGUAGE_REPOS = "language:kotlin"
+private const val LANGUAGE_REPOS = "language:java"
 
 internal class GetKotlinReposImp(
     private val repository: GitHubRepository,

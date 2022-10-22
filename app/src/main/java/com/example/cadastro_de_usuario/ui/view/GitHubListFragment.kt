@@ -17,6 +17,7 @@ import com.example.cadastro_de_usuario.commons.SuccessAction
 import com.example.cadastro_de_usuario.commons.isLoading
 import com.example.cadastro_de_usuario.databinding.FragmentListRepositoryBinding
 import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
+import com.example.cadastro_de_usuario.domain.vo.ListPullsVO
 import com.example.cadastro_de_usuario.ui.adapter.ListRepositoriesAdapter
 import com.example.cadastro_de_usuario.ui.viewmodel.GitHubListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,7 +26,7 @@ internal class GitHubListFragment : Fragment(R.layout.fragment_list_repository) 
 
     private val binding by lazy { FragmentListRepositoryBinding.bind(requireView()) }
     private val viewModel: GitHubListViewModel by viewModel()
-    private val repositoriesAdapter by lazy { ListRepositoriesAdapter() }
+    private val repositoriesAdapter by lazy { ListRepositoriesAdapter{ onClickItem() } }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -69,6 +70,10 @@ internal class GitHubListFragment : Fragment(R.layout.fragment_list_repository) 
         layoutManager = LinearLayoutManager(requireContext())
         setHasFixedSize(true)
         adapter = repositoriesAdapter
+    }
+
+    private fun onClickItem() {
+        findNavController().navigate(R.id.action_listFragment_to_pullRequestListFragment)
     }
 
     private fun hideLoading() {

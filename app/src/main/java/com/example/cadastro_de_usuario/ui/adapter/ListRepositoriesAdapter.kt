@@ -12,8 +12,9 @@ import com.example.cadastro_de_usuario.databinding.ItemRepositoryBinding
 import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
 import com.squareup.picasso.Picasso
 
-internal class ListRepositoriesAdapter:
-    PagingDataAdapter<GitHubListVO, ListRepositoriesAdapter.AdapterViewHolder>(COMPARATOR) {
+internal class ListRepositoriesAdapter(
+    private val onItemClick: (GitHubListVO) -> Unit
+) : PagingDataAdapter<GitHubListVO, ListRepositoriesAdapter.AdapterViewHolder>(COMPARATOR) {
 
     inner class AdapterViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = ItemRepositoryBinding.bind(view)
@@ -41,8 +42,11 @@ internal class ListRepositoriesAdapter:
         )
 
     override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
-        getItem(position)?.let {
-            holder.bind(it)
+        getItem(position)?.let { item ->
+            holder.bind(item)
+            holder.itemView.setOnClickListener {
+                onItemClick(item)
+            }
         }
     }
 
