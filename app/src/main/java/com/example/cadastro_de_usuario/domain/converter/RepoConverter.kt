@@ -1,13 +1,14 @@
 package com.example.cadastro_de_usuario.domain.converter
 
-import android.content.res.Resources
 import com.example.cadastro_de_usuario.data.dto.GitHubRepositoryDTO
+import com.example.cadastro_de_usuario.data.dto.PullsListDTO
 import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
+import com.example.cadastro_de_usuario.domain.vo.ListPullsVO
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.Locale
 
-internal class RepoConverter(private val resources: Resources) {
+internal class RepoConverter {
 
     private companion object {
         val LOCATE = Locale("it", "IT")
@@ -32,4 +33,10 @@ internal class RepoConverter(private val resources: Resources) {
         DecimalFormat(
             PATTERN, DecimalFormatSymbols.getInstance(LOCATE)
         ).format(this)
+
+    fun converter(data: List<PullsListDTO>): List<ListPullsVO> {
+        return data.map { DTO->
+            ListPullsVO(title = DTO.title)
+        }
+    }
 }

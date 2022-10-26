@@ -7,6 +7,7 @@ import com.example.cadastro_de_usuario.domain.converter.RepoConverter
 import com.example.cadastro_de_usuario.domain.usecase.GetKotlinReposUseCase
 import com.example.cadastro_de_usuario.domain.usecase.GetKotlinReposImp
 import com.example.cadastro_de_usuario.ui.viewmodel.GitHubListViewModel
+import com.example.cadastro_de_usuario.ui.viewmodel.PullsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -16,9 +17,11 @@ internal val gitHubModule = module {
 
     factory<GitHubRepository> { GitHubRepositoryImp(get()) }
 
-    factory { RepoConverter(get()) }
+    factory { RepoConverter() }
 
     factory<GetKotlinReposUseCase> { GetKotlinReposImp(get(), get()) }
 
     viewModel { GitHubListViewModel(get()) }
+
+    viewModel { PullsViewModel(get(), get()) }
 }
