@@ -17,7 +17,6 @@ import com.example.cadastro_de_usuario.commons.SuccessAction
 import com.example.cadastro_de_usuario.commons.isLoading
 import com.example.cadastro_de_usuario.databinding.FragmentListRepositoryBinding
 import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
-import com.example.cadastro_de_usuario.domain.vo.ListPullsVO
 import com.example.cadastro_de_usuario.ui.adapter.ListRepositoriesAdapter
 import com.example.cadastro_de_usuario.ui.viewmodel.GitHubListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel

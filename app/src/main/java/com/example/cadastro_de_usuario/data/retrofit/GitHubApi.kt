@@ -1,7 +1,7 @@
 package com.example.cadastro_de_usuario.data.retrofit
 
 import com.example.cadastro_de_usuario.data.dto.GitHubRepositoryListResponseDTO
-import com.example.cadastro_de_usuario.data.dto.PullsListResponseDTO
+import com.example.cadastro_de_usuario.data.dto.PullsListDTO
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -20,6 +20,6 @@ internal interface GitHubApi {
     @GET("repos/{owner}/{repo}/pulls")
     suspend fun getSearchListPull(
         @Path("owner") owner: String,
-        @Path("repo") repo: String,
-    ): PullsListResponseDTO
+        @Path("repo") repo: String
+    ): List<PullsListDTO>
 }

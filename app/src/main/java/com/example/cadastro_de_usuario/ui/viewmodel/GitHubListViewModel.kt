@@ -9,11 +9,11 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.cadastro_de_usuario.commons.UiAction
 import com.example.cadastro_de_usuario.commons.asLiveData
-import com.example.cadastro_de_usuario.domain.usecase.GetKotlinReposUseCase
+import com.example.cadastro_de_usuario.domain.usecase.GetJavaReposUseCase
 import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
 import kotlinx.coroutines.flow.distinctUntilChanged
 
-internal class GitHubListViewModel (private val useCase: GetKotlinReposUseCase) : ViewModel() {
+internal class GitHubListViewModel (private val useCase: GetJavaReposUseCase) : ViewModel() {
 
     private val _repositories = MutableLiveData<Unit>()
     val repositories: LiveData<UiAction<PagingData<GitHubListVO>>> = _repositories.switchMap {

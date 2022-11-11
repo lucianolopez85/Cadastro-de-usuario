@@ -10,10 +10,10 @@ import kotlinx.coroutines.flow.map
 
 private const val LANGUAGE_REPOS = "language:java"
 
-internal class GetKotlinReposImp(
+internal class GetJavaReposImp(
     private val repository: GitHubRepository,
     private val converter: RepoConverter
-) : GetKotlinReposUseCase {
+) : GetJavaReposUseCase {
 
     override operator fun invoke(): Flow<PagingData<GitHubListVO>> =
         repository.getRepos(LANGUAGE_REPOS)

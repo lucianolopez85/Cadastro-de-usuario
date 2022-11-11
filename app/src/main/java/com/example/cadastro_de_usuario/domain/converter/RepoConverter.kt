@@ -33,10 +33,4 @@ internal class RepoConverter {
         DecimalFormat(
             PATTERN, DecimalFormatSymbols.getInstance(LOCATE)
         ).format(this)
-
-    fun converter(data: List<PullsListDTO>): List<ListPullsVO> {
-        return data.map { DTO->
-            ListPullsVO(title = DTO.title)
-        }
-    }
 }
