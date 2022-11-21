@@ -12,5 +12,6 @@ data class GitHubRepositoryDTO (
 )
 
 data class UserDTO(
-    @SerializedName("avatar_url") val avatar: String
+    @SerializedName("avatar_url") val avatar: String,
+    @SerializedName("login") val login: String
 )

@@ -17,9 +17,9 @@ internal class PullsViewModel(
     private val _listRepository = MutableLiveData<List<ListPullsVO>>()
     val listRepository: LiveData<List<ListPullsVO>> = _listRepository
 
-    fun fetchInformation() {
+    fun fetchInformation(owner: String, repo: String) {
         viewModelScope.launch {
-            val response = repository.getListRepository()
+            val response = repository.getListRepository(owner, repo)
             val list = converter.convert(response)
             _listRepository.postValue(list)
         }

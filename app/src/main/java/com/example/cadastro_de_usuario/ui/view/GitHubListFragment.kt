@@ -1,8 +1,10 @@
 package com.example.cadastro_de_usuario.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -25,7 +27,7 @@ internal class GitHubListFragment : Fragment(R.layout.fragment_list_repository) 
 
     private val binding by lazy { FragmentListRepositoryBinding.bind(requireView()) }
     private val viewModel: GitHubListViewModel by viewModel()
-    private val repositoriesAdapter by lazy { ListRepositoriesAdapter{ onClickItem() } }
+    private val repositoriesAdapter by lazy { ListRepositoriesAdapter{ onClickItem(it) } }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,8 +73,11 @@ internal class GitHubListFragment : Fragment(R.layout.fragment_list_repository) 
         adapter = repositoriesAdapter
     }
 
-    private fun onClickItem() {
-        findNavController().navigate(R.id.action_listFragment_to_pullRequestListFragment)
+    private fun onClickItem(data: GitHubListVO) {
+        val bundle = bundleOf(
+            "REPO" to data
+        )
+        findNavController().navigate(R.id.action_listFragment_to_pullRequestListFragment, bundle)
     }
 
     private fun hideLoading() {

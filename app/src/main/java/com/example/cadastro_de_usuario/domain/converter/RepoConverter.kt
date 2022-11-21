@@ -1,9 +1,7 @@
 package com.example.cadastro_de_usuario.domain.converter
 
 import com.example.cadastro_de_usuario.data.dto.GitHubRepositoryDTO
-import com.example.cadastro_de_usuario.data.dto.PullsListDTO
 import com.example.cadastro_de_usuario.domain.vo.GitHubListVO
-import com.example.cadastro_de_usuario.domain.vo.ListPullsVO
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.Locale
@@ -25,7 +23,8 @@ internal class RepoConverter {
             avatar = data.user.avatar,
             description = data.description,
             fork = forksAmount,
-            star = stargazersAmount
+            star = stargazersAmount,
+            login = data.user.login
         )
     }
 

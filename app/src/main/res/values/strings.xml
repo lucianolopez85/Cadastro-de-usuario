@@ -21,6 +21,7 @@
     <string name="management_delete">excluir</string>
 
     <string name="list_repository_title">lista de repositorios</string>
+    <string name="list_pull_request_title">lista de pull request</string>
 
     <string name="item_edit">Editar</string>
     <string name="item_delete">Excluir</string>
