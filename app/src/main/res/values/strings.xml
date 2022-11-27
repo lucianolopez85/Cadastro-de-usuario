@@ -12,7 +12,7 @@
 
     <string name="login_email">e-mail</string>
     <string name="login_password">senha</string>
-    <string name="login_enter">entrar</string>
+    <string name="login_enter">logar</string>
     <string name="login_register">Efetuar cadastro, clique aqui.</string>
 
     <string name="management_list">lista</string>

@@ -8,7 +8,7 @@
 
 
     <EditText
-        android:id="@+id/edit_cadastro_email"
+        android:id="@+id/input_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_register_user"
@@ -23,7 +23,7 @@
         />
 
     <EditText
-        android:id="@+id/edit_cadastro_password"
+        android:id="@+id/input_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
@@ -33,28 +33,28 @@
         android:maxLines="1"
         android:padding="@dimen/spacing_16"
         android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintTop_toBottomOf="@+id/edit_cadastro_email"
+        app:layout_constraintTop_toBottomOf="@+id/input_login"
         />
 
     <Button
-        android:id="@+id/login_entrar_button"
+        android:id="@+id/button_logar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_24"
         android:text="@string/login_enter"
         android:backgroundTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_cadastro_password"
+        app:layout_constraintTop_toBottomOf="@id/input_password"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
     <TextView
-        android:id="@+id/efetuar_cadastro"
+        android:id="@+id/text_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login_register"
         android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintTop_toBottomOf="@+id/login_entrar_button"
+        app:layout_constraintTop_toBottomOf="@+id/button_logar"
         app:layout_constraintStart_toStartOf="parent"
         />
 
