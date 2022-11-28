@@ -1,5 +1,6 @@
 package com.example.cadastro_de_usuario.di
 
+import com.example.cadastro_de_usuario.data.dbsqlite.DataBaseSQLite
 import com.example.cadastro_de_usuario.data.retrofit.GitHubApi
 import com.example.cadastro_de_usuario.data.repository.GitHubRepository
 import com.example.cadastro_de_usuario.data.repository.GitHubRepositoryImp
@@ -31,4 +32,6 @@ internal val gitHubModule = module {
     factory { PullsRepoConverter() }
 
     viewModel { PullsViewModel(get(),get()) }
+
+    factory { DataBaseSQLite(get()) }
 }

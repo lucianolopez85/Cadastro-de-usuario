@@ -2,37 +2,32 @@ package com.example.cadastro_de_usuario.ui.view
 
 import android.os.Bundle
 import android.util.Patterns
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.cadastro_de_usuario.R
 import com.example.cadastro_de_usuario.data.dbsqlite.DataBaseSQLite
 import com.example.cadastro_de_usuario.databinding.FragmentRegisterBinding
 import com.example.cadastro_de_usuario.domain.vo.UserDataVO
-import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.fragment_register.input_layout_name
+import kotlinx.android.synthetic.main.fragment_register.input_layout_email
+import kotlinx.android.synthetic.main.fragment_register.input_layout_senha
+import kotlinx.android.synthetic.main.fragment_register.edit_cadastro_name
+import kotlinx.android.synthetic.main.fragment_register.edit_cadastro_email
+import kotlinx.android.synthetic.main.fragment_register.edit_cadastro_senha
+import java.security.MessageDigest
 
-class RegisterFragment : Fragment() {
+internal class RegisterFragment : Fragment(R.layout.fragment_register) {
 
-    private lateinit var dataBaseSQLite: DataBaseSQLite
-    private var _binding: FragmentRegisterBinding? = null
-    private val binding get() = _binding!!
+    private val binding by lazy { FragmentRegisterBinding.bind(requireView()) }
+    private val dataBaseSQLite by lazy { DataBaseSQLite(requireContext()) }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        dataBaseSQLite = DataBaseSQLite(requireContext())
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupToolbar()
         setupButtonSave()
         dataFocusListener()
-
-        return binding.root
     }
 
     private fun setupToolbar() {
@@ -92,10 +87,18 @@ class RegisterFragment : Fragment() {
                 id = cont + 1,
                 name = edit_cadastro_name.text.toString(),
                 email = edit_cadastro_email.text.toString(),
-                password = edit_cadastro_senha.text.toString(),
+                password = setupHash(edit_cadastro_senha.text.toString().toByteArray()),
                 type = checkedRadioGroup
             )
         )
+    }
+
+    private fun setupHash(inByte: ByteArray): String {
+        val digestedBytes = MessageDigest.getInstance("SHA-256").digest(inByte)
+        return with(StringBuilder()) {
+            digestedBytes.forEach { b -> append(String.format("%02X", b)) }
+            toString().lowercase()
+        }
     }
 
     private fun dataFocusListener() {
@@ -142,10 +145,5 @@ class RegisterFragment : Fragment() {
             return "Deve conter no minimo um numero"
         }
         return ""
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

@@ -13,7 +13,9 @@
     <string name="login_email">e-mail</string>
     <string name="login_password">senha</string>
     <string name="login_enter">logar</string>
-    <string name="login_register">Efetuar cadastro, clique aqui.</string>
+    <string name="login_register">Efetuar cadastro,</string>
+    <string name="login_alert">Senha ou login inválido</string>
+    <string name="login_click">clique aqui.</string>
 
     <string name="management_list">lista</string>
     <string name="management_title">gestao de usuarios</string>

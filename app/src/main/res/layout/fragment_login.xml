@@ -19,8 +19,7 @@
         android:textAllCaps="false"
         android:layout_marginTop="@dimen/spacing_80"
         android:layout_marginHorizontal="@dimen/spacing_24"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/input_password"
@@ -29,12 +28,23 @@
         android:textAllCaps="false"
         android:background="@drawable/edit_text_register_user"
         android:hint="@string/login_password"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         android:maxLines="1"
         android:padding="@dimen/spacing_16"
         android:layout_margin="@dimen/spacing_24"
-        app:layout_constraintTop_toBottomOf="@+id/input_login"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/input_login" />
+
+    <TextView
+        android:id="@+id/text_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_alert"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:textColor="@color/red"
+        android:layout_margin="@dimen/spacing_24"
+        app:layout_constraintTop_toBottomOf="@+id/input_password"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_logar"
@@ -44,18 +54,31 @@
         android:text="@string/login_enter"
         android:backgroundTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_password"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/text_alert"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/text_register"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_register"
+        android:textSize="16sp"
+        android:textColor="@color/text_black"
         android:layout_margin="@dimen/spacing_24"
         app:layout_constraintTop_toBottomOf="@+id/button_logar"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/text_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_4"
+        android:text="@string/login_click"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/text_register"
+        app:layout_constraintStart_toEndOf="@+id/text_register"
+        app:layout_constraintTop_toTopOf="@+id/text_register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,7 @@ import com.example.cadastro_de_usuario.databinding.DialogAlertDeleteBinding
 import com.example.cadastro_de_usuario.databinding.DialogAlertEditBinding
 import com.example.cadastro_de_usuario.databinding.DialogAlertUserBinding
 
-class ListAdapter(
+internal class ListAdapter(
     private var userList: List<UserDataVO> = ArrayList()
 ) : RecyclerView.Adapter<ListAdapter.AdapterViewHolder>() {
 

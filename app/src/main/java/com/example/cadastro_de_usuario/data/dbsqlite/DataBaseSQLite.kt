@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.cadastro_de_usuario.domain.vo.UserDataVO
 
-class DataBaseSQLite(context: Context): SQLiteOpenHelper(context, db_NAME, null, db_VERSION) {
+internal class DataBaseSQLite(context: Context): SQLiteOpenHelper(context, db_NAME, null, db_VERSION) {
 
     companion object {
         private val db_VERSION = 1
@@ -58,6 +58,15 @@ class DataBaseSQLite(context: Context): SQLiteOpenHelper(context, db_NAME, null,
         }
         cursor.close()
         return  userDataVOList
+    }
+
+    fun getUser(email: String): UserDataVO {
+        val db = readableDatabase
+        val selectQuery = "SELECT * FROM $TABLE_NAME WHERE $EMAIL = $email;"
+        val cursor = db.rawQuery(selectQuery, null)
+        val user = populateUser(cursor)
+        cursor.close()
+        return user
     }
 
     fun updateUser(userDataVO: UserDataVO) {
