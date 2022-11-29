@@ -22,7 +22,7 @@ internal class DataBaseSQLite(context: Context): SQLiteOpenHelper(context, db_NA
 
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_TABLE =
-            "CREATE TABLE $TABLE_NAME($ID INTEGER PRIMARY KEY, $NAME TEXT, $EMAIL TEXT, $PASSWORD TEXT, $USER_TYPE TEXT);"
+            "CREATE TABLE $TABLE_NAME($ID INTEGER PRIMARY KEY, $NAME TEXT, $EMAIL TEXT PRIMARY KEY, $PASSWORD TEXT, $USER_TYPE TEXT);"
         db?.execSQL(CREATE_TABLE)
     }
 
@@ -62,8 +62,9 @@ internal class DataBaseSQLite(context: Context): SQLiteOpenHelper(context, db_NA
 
     fun getUser(email: String): UserDataVO {
         val db = readableDatabase
-        val selectQuery = "SELECT * FROM $TABLE_NAME WHERE $EMAIL = $email;"
-        val cursor = db.rawQuery(selectQuery, null)
+        val selectQuery = "SELECT * FROM $TABLE_NAME WHERE $EMAIL=?;"
+        val cursor = db.rawQuery(selectQuery, arrayOf(email))
+        cursor?.moveToFirst()
         val user = populateUser(cursor)
         cursor.close()
         return user
@@ -93,7 +94,6 @@ internal class DataBaseSQLite(context: Context): SQLiteOpenHelper(context, db_NA
             password = cursor.getString(cursor.getColumnIndexOrThrow(PASSWORD))
             type = cursor.getInt(cursor.getColumnIndexOrThrow(USER_TYPE))
         }
-
         return userDataVO
     }
 }
