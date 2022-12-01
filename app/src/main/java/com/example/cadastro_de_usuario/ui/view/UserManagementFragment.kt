@@ -16,26 +16,25 @@ import com.example.cadastro_de_usuario.ui.viewmodel.UserManagementViewModel
 class UserManagementFragment : Fragment(R.layout.fragment_user_management) {
 
     private val binding: FragmentUserManagementBinding by lazy { FragmentUserManagementBinding.bind(requireView()) }
-    private val viewModel: UserManagementViewModel by lazy { UserManagementViewModel(DataBaseSQLite(requireContext()))}
+    private val viewModel: UserManagementViewModel by lazy { UserManagementViewModel(DataBaseSQLite(requireContext())) }
 
     override fun onViewCreated(view: View, savedInstancesState: Bundle?) {
-
         setupToolbar()
         setupObserver()
     }
 
-    private fun setupToolbar() {
-        binding.iconBack.setOnClickListener {
+    private fun setupToolbar() = with(binding) {
+        iconBack.setOnClickListener {
             findNavController().navigate(R.id.action_userManagementFragment_to_registerFragment)
         }
-        binding.buttonLista.setOnClickListener {
+        buttonLista.setOnClickListener {
             findNavController().navigate(R.id.action_userManagementFragment_to_listFragment)
         }
     }
 
-    private fun setupObserver() {
-        viewModel.userData.observe(viewLifecycleOwner, ::onSuccess)
-        viewModel.fetchInformation()
+    private fun setupObserver() = with(viewModel) {
+        userData.observe(viewLifecycleOwner, ::onSuccess)
+        fetchInformation()
     }
 
     private fun onSuccess(list: List<UserDataVO>) = with(binding.recyclerView) {

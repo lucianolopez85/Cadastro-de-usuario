@@ -16,16 +16,25 @@
 
     <TextView
         android:id="@+id/text_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         style="@style/TextAppearance.Material3.BodyLarge"
         android:textStyle="bold"
         android:layout_height="wrap_content"
         android:text="@string/list_repository_title"
         android:textAllCaps="true"
         android:gravity="center"
-        android:layout_margin="@dimen/spacing_24"
+        android:layout_margin="@dimen/spacing_26"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/icon_close"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="@dimen/spacing_26"
+        android:src="@drawable/icon_close"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -48,7 +57,5 @@
             tools:listitem="@layout/item_repository" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

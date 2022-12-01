@@ -97,18 +97,3 @@ internal class DataBaseSQLite(context: Context): SQLiteOpenHelper(context, db_NA
         return userDataVO
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

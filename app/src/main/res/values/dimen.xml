@@ -5,6 +5,7 @@
     <dimen name="spacing_60">60dp</dimen>
     <dimen name="spacing_50">50dp</dimen>
     <dimen name="spacing_28">28dp</dimen>
+    <dimen name="spacing_26">26dp</dimen>
     <dimen name="spacing_24">24dp</dimen>
     <dimen name="spacing_16">16dp</dimen>
     <dimen name="spacing_14">14dp</dimen>

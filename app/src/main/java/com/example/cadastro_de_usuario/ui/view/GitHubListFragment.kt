@@ -1,7 +1,6 @@
 package com.example.cadastro_de_usuario.ui.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -12,7 +11,7 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cadastro_de_usuario.R
-import com.example.cadastro_de_usuario.commons.*
+import com.example.cadastro_de_usuario.commons.isError
 import com.example.cadastro_de_usuario.commons.ErrorAction
 import com.example.cadastro_de_usuario.commons.LoadAction
 import com.example.cadastro_de_usuario.commons.SuccessAction
@@ -23,11 +22,14 @@ import com.example.cadastro_de_usuario.ui.adapter.ListRepositoriesAdapter
 import com.example.cadastro_de_usuario.ui.viewmodel.GitHubListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+private const val USER = 2131231111
+
 internal class GitHubListFragment : Fragment(R.layout.fragment_list_repository) {
 
     private val binding by lazy { FragmentListRepositoryBinding.bind(requireView()) }
     private val viewModel: GitHubListViewModel by viewModel()
     private val repositoriesAdapter by lazy { ListRepositoriesAdapter{ onClickItem(it) } }
+    private val userType by lazy { arguments?.let { it.getInt("typeData") } }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,9 +37,13 @@ internal class GitHubListFragment : Fragment(R.layout.fragment_list_repository) 
         setupObserver()
     }
 
-    private fun setupToolbar() {
-        binding.iconBack.setOnClickListener {
+    private fun setupToolbar() = with(binding) {
+        iconBack.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_gestaoFragment)
+        }
+
+        iconClose.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_loginFragment)
         }
     }
 
@@ -65,6 +71,7 @@ internal class GitHubListFragment : Fragment(R.layout.fragment_list_repository) 
         initRecyclerView()
         addLoadStateListener(getLoadStateListener())
         submitData(viewLifecycleOwner.lifecycle, data)
+        binding.iconBack.isVisible = userType != USER
     }
 
     private fun initRecyclerView() = with(binding.recyclerView) {
@@ -75,7 +82,8 @@ internal class GitHubListFragment : Fragment(R.layout.fragment_list_repository) 
 
     private fun onClickItem(data: GitHubListVO) {
         val bundle = bundleOf(
-            "REPO" to data
+            "REPOSITORY_DATA" to data,
+            "USER_TYPE_DATA" to userType
         )
         findNavController().navigate(R.id.action_listFragment_to_pullRequestListFragment, bundle)
     }

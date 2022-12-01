@@ -36,6 +36,7 @@
             android:id="@+id/action_registerFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/UserManagementFragment"
         android:name="com.example.cadastro_de_usuario.ui.view.UserManagementFragment"
@@ -49,6 +50,7 @@
             app:destination="@id/listFragment" />
 
     </fragment>
+
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.cadastro_de_usuario.ui.view.GitHubListFragment"
@@ -60,7 +62,11 @@
         <action
             android:id="@+id/action_listFragment_to_pullRequestListFragment"
             app:destination="@id/pullRequestListFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/pullRequestListFragment"
         android:name="com.example.cadastro_de_usuario.ui.view.PullRequestListFragment"

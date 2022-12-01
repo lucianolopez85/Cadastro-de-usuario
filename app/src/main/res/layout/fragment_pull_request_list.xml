@@ -23,7 +23,7 @@
         android:text="@string/list_pull_request_title"
         android:textAllCaps="true"
         android:gravity="center"
-        android:layout_margin="@dimen/spacing_24"
+        android:layout_margin="@dimen/spacing_26"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
